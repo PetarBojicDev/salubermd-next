@@ -8,19 +8,21 @@ interface InputWithTitleProps {
   type: string;
   info: string;
   validated: boolean;
+  inputStyle: string;
+  titleStyle: string;
 }
 
-const InputWithTitle: React.FC<InputWithTitleProps> = ({ title, value, setValue, type, info, validated }) => {
+const InputWithTitle: React.FC<InputWithTitleProps> = ({ title, value, setValue, type, info, validated, inputStyle, titleStyle }) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   return (
-    <div className={styles.inputWidth}>
-      {title && <span className={styles.inputTitle}>{title}</span>}
-      <input className={styles.inputField} type={type} value={value} onChange={handleChange} />
-      {info && <a href={""} className={styles.inputInfo}>{info}</a>}
+    <div className={inputStyle}>
+      {title && <span className={titleStyle}>{title}</span>}
+      <input className={`h-10 border-solid rounded-xl border-2 focus:outline-none pl-2 ${!validated ? "border-invalid" : "border-gray-light"}`} type={type} value={value} onChange={handleChange} />
+      {info && <a href={""} className="text-right text-blue text-sm font-bold hover:underline">{info}</a>}
     </div>
   );
 }

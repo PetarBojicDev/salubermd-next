@@ -21,7 +21,6 @@ export default function Splash() {
   },[]);
 
   return (
-    <div className={styles.backgroundImage}>
-    </div>
+    <div className={styles.backgroundImage}/>
   );
 }

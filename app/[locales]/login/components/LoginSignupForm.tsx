@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../page.module.css";
-import buttonStyles from "../../page.module.css";
 import Image from "next/image";
 import LoginLogo from "../../../../public/images/login-logo.png";
 import InputWithTitle from "../../../[locales]/components/InputWithTitle";
@@ -26,22 +24,23 @@ export default function LoginSignupForm() {
   }
 
   return (
-    <div className={styles.formContainer}>
+    <div className="flex flex-col bg-white lg:w-1/3 w-2/3 mx-auto rounded-xl">
         <Image
-            src={LoginLogo}
-            alt="Login logo"
-            height={50}
-            className={styles.loginLogo}
-            priority
+          src={LoginLogo}
+          alt="Login logo"
+          className="lg:w-2/5 w-3/5 mx-auto pt-5"
+          priority
         />
-        <h3 className={styles.title}>{translate("saluber_welcome")}</h3>
+        <span className="font-bold lg:text-2xl text-base mx-auto mt-3">{translate("saluber_welcome")}</span>
         <InputWithTitle 
           title={translate("username")} 
           value={username} 
           setValue={setUsername}
           type={"text"}
           info={""}
-          validated={validateUsername()}        
+          validated={validateUsername()}    
+          inputStyle="w-4/5 mt-4 inline-grid mx-auto"
+          titleStyle="text-left text-sm font-bold" 
         />
         <InputWithTitle 
           title={translate("password")} 
@@ -49,16 +48,18 @@ export default function LoginSignupForm() {
           setValue={setPassword}
           type={"password"}
           info={translate("forgot_password")}
-          validated={validatePassword()}        
+          validated={validatePassword()}
+          inputStyle="w-4/5 mt-4 inline-grid mx-auto"
+          titleStyle="text-left text-sm font-bold"             
         />
         <Button
           text={translate("login")}
-          disabled={false}
-          addedStyle={buttonStyles.loginButton}
+          disabled={validatePassword() && validateUsername()}
+          buttonStyle="w-4/5 mx-auto mt-7 h-10 rounded-xl"
         />
-        <div className={styles.bottomStyle}>
+        <div className="mt-2.5 mb-20 lg:text-base text-xs mx-auto">
           <span>{translate("dont_have_account")} </span>
-          <Link className={styles.linkStyle} href={"/en_US/signup"}>{translate("signup")}</Link>
+          <Link className="text-blue hover:underline font-bold" href={"/en_US/signup"}>{translate("signup")}</Link>
         </div>
     </div>
   );
