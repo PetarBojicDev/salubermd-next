@@ -3,5 +3,14 @@
     "username": "Utente",
     "password": "Password",
     "forgot_password": "Ha dimenticato la password?",
-    "saluber_welcome": "Benvenuto a SaluberMD!"
+    "saluber_welcome": "Benvenuto a SaluberMD!",
+    "signup": "Iscrizione",
+    "dont_have_account": "Non hai un account?",
+    "ENG": "Inglese",
+    "ITA": "Italiano",
+    "get_started": "Ciao, cominciamo!",
+    "email": "E-mail",
+    "registration_code": "Codice registrazione",
+    "already_have_account": "Hai già un account?",
+    "next": "Prossimo"
 }

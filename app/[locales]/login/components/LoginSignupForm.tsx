@@ -7,8 +7,13 @@ import Button from "../../../[locales]/components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import isNotBlank from "../../../../public/constants/utils";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function LoginSignupForm() {
+
+  const language = useSelector((state: RootState) => state.language.value);
+  console.log(language);
 
   const translate = useTranslations();
 
@@ -33,7 +38,8 @@ export default function LoginSignupForm() {
         />
         <span className="font-bold lg:text-2xl text-base mx-auto mt-3">{translate("saluber_welcome")}</span>
         <InputWithTitle 
-          titleLeft={translate("username")} 
+          titleLeft={translate("username")}
+          iconRight="" 
           value={username} 
           setValue={setUsername}
           type={"text"}
@@ -42,7 +48,8 @@ export default function LoginSignupForm() {
           titleStyle="text-left text-sm font-bold" 
         />
         <InputWithTitle 
-          titleLeft={translate("password")} 
+          titleLeft={translate("password")}
+          iconRight="" 
           value={password} 
           setValue={setPassword}
           type={"password"}

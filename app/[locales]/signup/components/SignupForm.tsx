@@ -7,7 +7,7 @@ import Button from "../../../[locales]/components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import isNotBlank from "../../../../public/constants/utils";
-import { FaQuestion } from "react-icons/fa";
+import { FaRegQuestionCircle } from "react-icons/fa";
 
 export default function SignupForm() {
 
@@ -36,7 +36,7 @@ export default function SignupForm() {
           className="lg:w-2/5 w-3/5 mx-auto pt-5"
           priority
         />
-        <span className="font-bold lg:text-2xl text-base mx-auto mt-3">{translate("getStarted")}</span>
+        <span className="font-bold lg:text-2xl text-base mx-auto mt-3">{translate("get_started")}</span>
         <InputWithTitle 
           titleLeft={translate("email")} 
           iconRight=""
@@ -48,8 +48,8 @@ export default function SignupForm() {
           titleStyle="text-left text-sm font-bold"
         />
         <InputWithTitle 
-          titleLeft={translate("registrationCode")} 
-          iconRight={ <Link href="?modal=true"><FaQuestion className="label-text-alt" onClick={handleIconClick}/></Link>}
+          titleLeft={translate("registration_code")} 
+          iconRight={ <Link href="?modal=true"><FaRegQuestionCircle size={16} onClick={handleIconClick}/></Link>}
           value={regCode} 
           setValue={setRegCode}
           type={"text"}
@@ -63,7 +63,7 @@ export default function SignupForm() {
           buttonStyle="w-4/5 mx-auto mt-7 h-10 rounded-xl"
         />
         <div className="mt-2.5 mb-20 lg:text-base text-xs mx-auto">
-          <span>{translate("alreadyHaveAccount")}</span>
+          <span>{translate("already_have_account")}</span>
           <Link className="text-blue hover:underline font-bold" href={"/en_US/login"}> {translate("login")}</Link>
         </div>
     </div>

@@ -31,7 +31,7 @@ const InputWithTitle: React.FC<InputWithTitleProps> = ({ titleLeft, iconRight, b
         {iconRight && <span className="label-text-alt cursor-pointer">{iconRight}</span>}
       </div>
       <input placeholder={placeholderTxt || "Type here..."} 
-        className={`input  ${!validated ? "input-error" : "input-bordered"} w-full ${
+        className={`input border-2 ${!validated ? "input-error" : "input-bordered"} w-full ${
         !validated ? "border-invalid focus:border-invalid" : "border-gray-light focus:border-gray-light"}`}
         type={type} value={value} onChange={handleChange} disabled={inputDisabled}/>
       <div className="label">
