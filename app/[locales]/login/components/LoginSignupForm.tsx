@@ -33,24 +33,24 @@ export default function LoginSignupForm() {
         />
         <span className="font-bold lg:text-2xl text-base mx-auto mt-3">{translate("saluber_welcome")}</span>
         <InputWithTitle 
-          title={translate("username")} 
+          titleLeft={translate("username")} 
           value={username} 
           setValue={setUsername}
           type={"text"}
-          info={""}
           validated={validateUsername()}    
           inputStyle="w-4/5 mt-4 inline-grid mx-auto"
           titleStyle="text-left text-sm font-bold" 
         />
         <InputWithTitle 
-          title={translate("password")} 
+          titleLeft={translate("password")} 
           value={password} 
           setValue={setPassword}
           type={"password"}
-          info={translate("forgot_password")}
+          bottomTextLeft={translate("forgot_password")}
           validated={validatePassword()}
           inputStyle="w-4/5 mt-4 inline-grid mx-auto"
           titleStyle="text-left text-sm font-bold"             
+          bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
         <Button
           text={translate("login")}
