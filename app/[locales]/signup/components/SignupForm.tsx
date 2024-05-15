@@ -8,10 +8,13 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import isNotBlank from "../../../../public/constants/utils";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function SignupForm() {
 
   const translate = useTranslations();
+  const language = useSelector((state: RootState) => state.language.value);
 
   const [email, setEmail] = useState("");
   const [regCode, setRegCode] = useState("");
@@ -64,7 +67,7 @@ export default function SignupForm() {
         />
         <div className="mt-2.5 mb-20 lg:text-base text-xs mx-auto">
           <span>{translate("already_have_account")}</span>
-          <Link className="text-blue hover:underline font-bold" href={"/en_US/login"}> {translate("login")}</Link>
+          <Link className="text-blue hover:underline font-bold" href={`/${language}/login`}> {translate("login")}</Link>
         </div>
     </div>
   );

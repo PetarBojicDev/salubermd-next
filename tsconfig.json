@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", "public/constants/languages.js", "lib/hooks.ts", "lib/store.ts", "app/[locales]/StoreProvider.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", "public/constants/languages.ts", "lib/hooks.ts", "lib/store.ts", "app/[locales]/StoreProvider.tsx"],
   "exclude": ["node_modules"]
 }

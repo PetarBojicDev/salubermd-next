@@ -9,21 +9,16 @@ import { setLanguage } from "../../store/states/language";
 export default function Splash() {
 
   const router = useRouter();
-
-  // const count = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-    const browserLangage = navigator.language.split("-")[0];
-    const language = languages.array.find((x) => x.value === browserLangage)?.language;
-
-    
+    const browserLanguage: string = navigator.language.split("-")[0];
+    const language = languages.array.find((x) => x.value === browserLanguage)?.language;
 
     if(localStorage.getItem("token")) {
       //fetching data and proceeding to homepage
     }else{
-      dispatch(setLanguage(language));
+      dispatch(setLanguage(language || "en_US"));
       setTimeout(() => {
         router.push(`/${language}/login`);
       }, 2500);

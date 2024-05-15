@@ -2,18 +2,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import LoginLogo from "../../../../public/images/login-logo.png";
-import InputWithTitle from "../../../[locales]/components/InputWithTitle";
-import Button from "../../../[locales]/components/Button";
+import InputWithTitle from "../../components/InputWithTitle";
+import Button from "../../components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import isNotBlank from "../../../../public/constants/utils";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-export default function LoginSignupForm() {
+export default function LoginForm() {
 
   const language = useSelector((state: RootState) => state.language.value);
-  console.log(language);
 
   const translate = useTranslations();
 
@@ -44,7 +43,7 @@ export default function LoginSignupForm() {
           setValue={setUsername}
           type={"text"}
           validated={validateUsername()}    
-          inputStyle="w-4/5 mt-4 inline-grid mx-auto"
+          inputStyle="form-control w-4/5 mx-auto"
           titleStyle="text-left text-sm font-bold" 
         />
         <InputWithTitle 
@@ -55,7 +54,7 @@ export default function LoginSignupForm() {
           type={"password"}
           bottomTextLeft={translate("forgot_password")}
           validated={validatePassword()}
-          inputStyle="w-4/5 mt-4 inline-grid mx-auto"
+          inputStyle="form-control w-4/5 mx-auto"
           titleStyle="text-left text-sm font-bold"             
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
@@ -66,7 +65,7 @@ export default function LoginSignupForm() {
         />
         <div className="mt-2.5 mb-20 lg:text-base text-xs mx-auto">
           <span>{translate("dont_have_account")} </span>
-          <Link className="text-blue hover:underline font-bold" href={"/en_US/signup"}>{translate("signup")}</Link>
+          <Link className="text-blue hover:underline font-bold" href={`/${language}/signup`}>{translate("signup")}</Link>
         </div>
     </div>
   );

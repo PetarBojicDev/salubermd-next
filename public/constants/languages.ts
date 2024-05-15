@@ -1,4 +1,11 @@
-export const array = [
+export interface LanguageOption {
+    value: string;
+    language: string;
+    icon: string;
+    label: string;
+}
+
+export const array: LanguageOption[] = [
     {
         value: "en",
         language: "en_US",
