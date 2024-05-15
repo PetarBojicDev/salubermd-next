@@ -41,7 +41,7 @@ const InputWithTitle: React.FC<InputWithTitleProps> = ({ titleLeft, iconRight, b
       <div className="relative">
         <input placeholder={placeholderTxt || "Type here..."} 
           className={`input border-2 ${!validated ? "input-error" : "input-bordered"} w-full ${
-          !validated ? "border-invalid focus:border-invalid" : "border-gray-light focus:border-gray-light"}`}
+          !validated ? "border-invalid focus:border-invalid" : "border-gray-light focus:border-gray-light"} focus:outline-none`}
           type={type === 'password' ? (showPassword ? "text" : "password") : type} value={value} 
           onChange={handleChange} onBlur={() => setShowPassword(false)} disabled={inputDisabled} />
         {type === 'password' && 
