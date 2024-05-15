@@ -19,6 +19,7 @@ export default function SignupForm() {
 
   const [email, setEmail] = useState("");
   const [regCode, setRegCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validateEmail = () => {
     return isNotBlank(email);
@@ -35,8 +36,18 @@ export default function SignupForm() {
     }
   }
 
+  const onPressSignup = () => {
+    if(!loading) {
+      setLoading(true);
+      console.log("test");
+      setTimeout(() => {
+        setLoading(false);
+      },3000);
+    }
+  }
+
   return (
-    <div className="flex flex-col bg-white lg:w-1/3 w-2/3 mx-auto rounded-xl">
+    <div className="flex flex-col bg-white lg:w-1/3 w-2/3 mx-auto rounded-xl shadow-2xl">
         <Image
           src={LoginLogo}
           alt="Login logo"
@@ -67,9 +78,13 @@ export default function SignupForm() {
         <Button
           text={translate("next")}
           disabled={validateEmail() && validateRegCode()}
-          buttonStyle="w-4/5 mx-auto mt-7 h-10 rounded-xl"
+          buttonStyle="w-4/5 mx-auto mt-7 h-10 rounded-xl hover:bg-dark-blue"
+          disabledButtonStyle="bg-gray-light text-gray"
+          enabledButtonStyle="bg-blue text-white"
+          loading={loading}
+          onPress={onPressSignup}
         />
-        <div className="mt-2.5 mb-20 lg:text-base text-xs mx-auto">
+        <div className="mt-2.5 mb-10 lg:text-base text-xs mx-auto">
           <span>{translate("already_have_account")}</span>
           <Link className="text-blue hover:underline font-bold" href={`/${language}/login`}> {translate("login")}</Link>
         </div>

@@ -19,6 +19,8 @@ const config: Config = {
       'gray-light': '#d3dce6',
       'white': '#ffffff',
       'invalid': '#f99f97',
+      'dark-blue': '#2963cf',
+      'red': '#f50202',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

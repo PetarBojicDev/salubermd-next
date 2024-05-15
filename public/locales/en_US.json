@@ -15,5 +15,6 @@
     "next": "Next",
     "find_reg_code" : "The registration code can be found by reaching out to the SaluberMD support team",
     "info" : "Info",
-    "ok": "OK"
+    "ok": "OK",
+    "bad_credentials_description": "Sorry, your username or password was incorrect. Please double-check your credentials and try again."
 }

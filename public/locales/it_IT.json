@@ -15,5 +15,6 @@
     "next": "Prossimo",
     "find_reg_code" : "Il codice di registrazione può essere trovato contattando il team di supporto SaluberMD",
     "info": "Informazioni",
-    "ok": "OK"
+    "ok": "OK",
+    "bad_credentials_description": "Siamo spiacenti, il tuo nome utente o la tua password non erano corretti. Ricontrolla le tue credenziali e riprova."
 }

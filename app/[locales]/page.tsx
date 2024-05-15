@@ -14,8 +14,9 @@ export default function Splash() {
   useEffect(() => {
     const browserLanguage: string = navigator.language.split("-")[0];
     const language = languages.array.find((x) => x.value === browserLanguage)?.language;
+    localStorage.setItem("server","https://wseu.salubermd.com/backoffice/");
 
-    if(localStorage.getItem("token")) {
+    if(localStorage.getItem("X-AUTH-TOKEN")) {
       //fetching data and proceeding to homepage
     }else{
       dispatch(setLanguage(language || "en_US"));
