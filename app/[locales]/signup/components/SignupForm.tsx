@@ -10,6 +10,7 @@ import isNotBlank from "../../../../public/constants/utils";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Modal from "../../components/Modal";
 
 export default function SignupForm() {
 
@@ -28,7 +29,10 @@ export default function SignupForm() {
   }
   const handleIconClick = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    console.log('Icon clicked');
+    const modalHolder = document.getElementById('my_modal_2');
+    if(modalHolder){
+        modalHolder.showModal();
+    }
   }
 
   return (
@@ -69,6 +73,7 @@ export default function SignupForm() {
           <span>{translate("already_have_account")}</span>
           <Link className="text-blue hover:underline font-bold" href={`/${language}/login`}> {translate("login")}</Link>
         </div>
+        <Modal title={translate("info")} text={translate("find_reg_code")} />
     </div>
   );
 }

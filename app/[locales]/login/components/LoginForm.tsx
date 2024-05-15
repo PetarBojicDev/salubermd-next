@@ -13,7 +13,6 @@ import { RootState } from "@/store/store";
 export default function LoginForm() {
 
   const language = useSelector((state: RootState) => state.language.value);
-
   const translate = useTranslations();
 
   const [username, setUsername] = useState("");
