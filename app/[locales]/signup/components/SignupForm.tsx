@@ -73,7 +73,7 @@ export default function SignupForm() {
           <span>{translate("already_have_account")}</span>
           <Link className="text-blue hover:underline font-bold" href={`/${language}/login`}> {translate("login")}</Link>
         </div>
-        <Modal title={translate("info")} text={translate("find_reg_code")} />
+        <Modal title={translate("info")} text={translate("find_reg_code")} buttonText={translate("ok")} showButton={true} />
     </div>
   );
 }
