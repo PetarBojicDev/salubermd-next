@@ -18,5 +18,7 @@
     "ok": "OK",
     "bad_credentials_description": "Sorry, your username or password was incorrect. Please double-check your credentials and try again.",
     "invalid_reg_code": "The code inserted is not valid or has expired.",
-    "SERVER_ERROR" : "A server error has occurred. Please contact support for assistance."
+    "SERVER_ERROR" : "A server error has occurred. Please contact support for assistance.",
+    "online": "ONLINE",
+    "offline": "OFFLINE"
 }

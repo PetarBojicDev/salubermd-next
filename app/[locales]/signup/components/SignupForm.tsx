@@ -6,7 +6,7 @@ import InputWithTitle from "../../../[locales]/components/InputWithTitle";
 import Button from "../../../[locales]/components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import isNotBlank from "../../../../public/constants/utils";
+import { isNotBlank } from "../../../../public/constants/utils";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";

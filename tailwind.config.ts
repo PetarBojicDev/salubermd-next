@@ -21,6 +21,13 @@ const config: Config = {
       'invalid': '#f99f97',
       'dark-blue': '#2963cf',
       'red': '#f50202',
+      'background': '#e5e5e5',
+      'online': '#48bb78',
+      'offline': '#a7a8a9',
+      'online-switch': '#9ae6b4',
+      'offline-switch': '#dddee1',
+      'sidebar-blue': '#2c64cd',
+      'sidebar-divider': '#7aa5f5',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

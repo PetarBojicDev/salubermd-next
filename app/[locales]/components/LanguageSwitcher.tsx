@@ -1,13 +1,14 @@
 "use client";
-import * as LanguageHelper from "../../../../public/constants/languages";
+import * as LanguageHelper from "../../../public/constants/languages";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import unknownSource from "../../../../public/images/countries/download.png";
+import unknownSource from "../../../public/images/countries/download.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "@/store/states/language";
-import { LanguageOption } from "../../../../public/constants/languages";
-import { useRouter } from "next/navigation";
+import { LanguageOption } from "../../../public/constants/languages";
+import { usePathname, useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
+import { getRoute } from "../../../public/constants/utils";
 
 const LanguageSwitcher = () => {
 
@@ -16,10 +17,11 @@ const LanguageSwitcher = () => {
   const router = useRouter();
   const languageValue = useSelector((state: RootState) => state.language.value);
   const language = LanguageHelper.array.find((x => x.language == languageValue));
+  const path = usePathname();
 
   const changeLanguage = (value: LanguageOption) => {
     dispatch(setLanguage(value.language || "en_US"));
-    router.push(`/${value.language}/login`);
+    router.push(getRoute(path, value.language));
   } 
 
   return (

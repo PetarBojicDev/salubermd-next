@@ -6,7 +6,7 @@ import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import isNotBlank from "../../../../public/constants/utils";
+import { isNotBlank } from "../../../../public/constants/utils";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
@@ -82,7 +82,7 @@ export default function LoginForm() {
       const token = responseLogin.headers.get('x-auth-token');
       localStorage.setItem("X-AUTH-TOKEN",token || "");
       localStorage.setItem("server", endpoint);
-      router.push(`/${language}/home`);
+      router.push(`/${language}/doctor`);
     }    
     const dataLogin = await responseLogin.json();
     console.log(dataLogin);
