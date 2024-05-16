@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 
 const page = () => {
     const data = useSelector((state: RootState) => state.singUp.data);
-    console.log('=======================')
-    console.log(data)
 
     return (
         <div className="m-auto">

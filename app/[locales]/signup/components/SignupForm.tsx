@@ -47,11 +47,8 @@ export default function SignupForm() {
     if(!loading) {
       setLoading(true);
       const res = await apiGetServerByCode({code: regCode});
-      console.log('res: ', res)
       if(res){
         API.hostAPI = res?.endpoint;
-        const resLang = await callAPILsLanguage();
-        console.log('resLang: ', resLang)
         const checkEmailRes = await apiPostCheckEmail({code: regCode, email: email, locale: language});
         if(checkEmailRes) {
           if(checkEmailRes?.esito === '0'){
@@ -61,7 +58,7 @@ export default function SignupForm() {
             setErrorMessage(res?.motivo);
           }
         }else{
-          setErrorMessage(translate("SERVER_ERROR"));
+          setErrorMessage(translate("server_error"));
         }
       }else{
         setErrorMessage(translate("invalid_reg_code"));

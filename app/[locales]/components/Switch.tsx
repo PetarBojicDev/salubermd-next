@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Switch: React.FC<{ type: string }> = ({ type }) => {
 
   const onlineStatus = useSelector((state: RootState) => state.userInfo.onlineStatus);
-
-  console.log(onlineStatus);
   const dispatch = useDispatch();
 
   const toggleOnline = () => {

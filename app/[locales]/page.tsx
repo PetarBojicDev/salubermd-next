@@ -17,7 +17,7 @@ export default function Splash() {
     localStorage.setItem("server","https://wseu.salubermd.com/backoffice/");
 
     if(localStorage.getItem("X-AUTH-TOKEN")) {
-      //fetching data and proceeding to homepage
+      router.push(`/${language}/doctor/home`);
     }else{
       dispatch(setLanguage(language || "en_US"));
       setTimeout(() => {

@@ -1,17 +1,35 @@
-import { configureStore } from '@reduxjs/toolkit'
-import userInfoReducer from "./states/userInfo";
-import initiativeReducer from "./states/initiative";
-import languageReducer from "./states/language";
-import singUpReducer from './states/signup';
+import { configureStore,  } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootReducer from './rootReducer';
 
-export const store = configureStore({
-  reducer: {
-    userInfo: userInfoReducer,
-    initiative: initiativeReducer,
-    language: languageReducer,
-    singUp: singUpReducer
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: [
+          'persist/PERSIST',
+          'persist/REHYDRATE',
+          'persist/REGISTER',
+          'persist/PAUSE',
+          'persist/PURGE',
+          'persist/FLUSH',
+        ],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
+export default store;
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;

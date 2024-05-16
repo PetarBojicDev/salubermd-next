@@ -1,8 +1,6 @@
 "use client";
 import * as LanguageHelper from "../../../public/constants/languages";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
-import unknownSource from "../../../public/images/countries/download.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "@/store/states/language";
 import { LanguageOption } from "../../../public/constants/languages";
@@ -22,17 +20,13 @@ const LanguageSwitcher = () => {
   const changeLanguage = (value: LanguageOption) => {
     dispatch(setLanguage(value.language || "en_US"));
     router.push(getRoute(path, value.language));
-  } 
+  }
 
   return (
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn m-1 bg-white">
         <span>{language?.label}</span>
-        <Image
-          src={language?.icon || unknownSource} 
-          alt={"Country image"}
-          height={30}
-          width={30}/>
+        <img src={`/images/countries/${language?.icon}`} height={30} width={30} alt="/images/countries/download.png"/>
       </div>
       <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-52 rounded-lg">
       {LanguageHelper.array.map((lan) => {

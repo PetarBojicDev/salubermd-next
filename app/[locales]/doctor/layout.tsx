@@ -12,7 +12,9 @@ export default async function DoctorLayout({
     <>
       <Header/>
       <Drawer/>
-      {children}
+      <div className="pt-20">
+        {children}
+      </div>  
     </>
   );
 }

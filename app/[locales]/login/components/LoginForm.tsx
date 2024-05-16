@@ -85,7 +85,6 @@ export default function LoginForm() {
       router.push(`/${language}/doctor`);
     }    
     const dataLogin = await responseLogin.json();
-    console.log(dataLogin);
   }
 
   const onPressLogin = async () => {
