@@ -16,5 +16,7 @@
     "find_reg_code" : "Il codice di registrazione può essere trovato contattando il team di supporto SaluberMD",
     "info": "Informazioni",
     "ok": "OK",
-    "bad_credentials_description": "Siamo spiacenti, il tuo nome utente o la tua password non erano corretti. Ricontrolla le tue credenziali e riprova."
+    "bad_credentials_description": "Siamo spiacenti, il tuo nome utente o la tua password non erano corretti. Ricontrolla le tue credenziali e riprova.",
+    "invalid_reg_code": "Il codice inserito non è valido o è scaduto.",
+    "SERVER_ERROR" : "Si è verificato un errore del server. Si prega di contattare il supporto per assistenza."
 }

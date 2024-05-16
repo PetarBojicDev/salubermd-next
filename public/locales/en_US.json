@@ -16,5 +16,7 @@
     "find_reg_code" : "The registration code can be found by reaching out to the SaluberMD support team",
     "info" : "Info",
     "ok": "OK",
-    "bad_credentials_description": "Sorry, your username or password was incorrect. Please double-check your credentials and try again."
+    "bad_credentials_description": "Sorry, your username or password was incorrect. Please double-check your credentials and try again.",
+    "invalid_reg_code": "The code inserted is not valid or has expired.",
+    "SERVER_ERROR" : "A server error has occurred. Please contact support for assistance."
 }
