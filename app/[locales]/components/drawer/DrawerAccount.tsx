@@ -8,10 +8,10 @@ export default function DrawerAccount() {
 
   return (
     <>
-      <div className={`h-32 items-center ml-10 inline-grid mt-5 ${drawerOpenedStatus ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.3s ease-in-out" }}>
-        <span className="text-sm text-sidebar-divider font-semibold">Welcome Back</span>
-        <span className="text-xl text-white font-semibold">Gianfranco G.</span>
-        <span className="text-lg text-white font-semibold hover:underline underline-offset-2">Your profile</span>
+      <div className={`h-32 items-center ml-10 mt-10 ${drawerOpenedStatus ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.3s ease-in-out" }}>
+        <span className="text-md text-sidebar-divider font-semibold block h-7">Welcome Back</span>
+        <span className="text-2xl text-white font-semibold block h-10">Gianfranco G.</span>
+        <span className="text-xl text-white font-semibold hover:underline underline-offset-2 h-7">Your profile</span>
       </div>
       <div className="h-px bg-sidebar-divider"/>
     </>

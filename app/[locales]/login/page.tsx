@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <div className={styles.backgroundImage}>
         <LoginForm/>
-        <div className="absolute top-10 right-10">
+        <div className="absolute lg:top-10 lg:right-10 top-1 right-1">
           <LanguageSwitcher/>
         </div>
     </div>

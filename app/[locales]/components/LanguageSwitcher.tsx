@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
   return (
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn m-1 bg-white">
-        <span>{language?.label}</span>
+        <span className="md:inline hidden">{language?.label}</span>
         <img src={`/images/countries/${language?.icon}`} height={30} width={30} alt="/images/countries/download.png"/>
       </div>
       <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-52 rounded-lg">

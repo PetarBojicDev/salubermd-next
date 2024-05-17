@@ -1,9 +1,11 @@
 .backgroundImage {
-    background-image: url('../../../public/images/background-login.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-    padding-top: 10%;
-  }
+  background-image: url('../../../public/images/background-login.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure it takes at least the full viewport height */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10%;
+}

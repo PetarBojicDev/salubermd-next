@@ -68,7 +68,7 @@ export default function SignupForm() {
   }
 
   return (
-    <div className="flex flex-col bg-white lg:w-1/3 w-2/3 mx-auto rounded-xl shadow-2xl">
+    <div className="flex flex-col bg-white lg:w-1/3 w-2/3 mx-auto rounded-xl shadow-2xl mb-10">
       <Image
         src={LoginLogo}
         alt="Login logo"

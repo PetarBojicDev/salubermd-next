@@ -29,7 +29,7 @@ const config: Config = {
       'offline-switch': '#dddee1',
       'sidebar-blue': '#2c64cd',
       'sidebar-divider': '#7aa5f5',
-      'darker-blue': '#133d8a',
+      'darker-blue': '#2354ad',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

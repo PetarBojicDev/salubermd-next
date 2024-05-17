@@ -8,7 +8,7 @@ export default function DoctorDrawerContent() {
   const drawerOpenedStatus = useSelector((state: RootState) => state.userInfo.drawerOpenedStatus);
 
   return (
-    <div className="inline-grid">
+    <div className={`inline-grid transition-all duration-300 ${drawerOpenedStatus ? "w-80" : "w-0"} h-20`}>
       <DrawerItem type={"home"}/>
       <DrawerItem type={"agenda"}/>
     </div>
