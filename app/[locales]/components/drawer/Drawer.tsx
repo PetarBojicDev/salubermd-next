@@ -10,8 +10,7 @@ export default function Drawer() {
   const drawerOpenedStatus = useSelector((state: RootState) => state.userInfo.drawerOpenedStatus);
 
   return (
-    <div className={`absolute bg-sidebar-blue h-screen z-10 transition-all duration-300 ${drawerOpenedStatus ? "w-80" : "w-0"}`}>
-      <div className="h-20 bg-white"></div>
+    <div className={`absolute bg-sidebar-blue z-10 transition-all duration-100 ${drawerOpenedStatus ? "md:w-80 w-60" : "w-0"} h-full`}>
       <DrawerAccount/>
       <DoctorDrawerContent/>
     </div>

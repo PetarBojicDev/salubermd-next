@@ -16,7 +16,7 @@ const DrawerOpener: React.FC = () => {
   }
 
   return (
-    <div className="lg:w-20 lg:h-20 h-16 w-16 bg-blue content-center hover:bg-dark-blue drawer-button" onClick={() => {toggleDrawer()}}>
+    <div className="md:w-20 md:h-20 h-16 w-16 bg-blue content-center hover:bg-dark-blue drawer-button" onClick={() => {toggleDrawer()}}>
       {drawerOpenedStatus ? 
         <MdClose className="mx-auto text-white align-middle" size={32}/> :
         <MdMenu className="mx-auto text-white align-middle" size={32}/>

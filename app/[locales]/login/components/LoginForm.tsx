@@ -10,9 +10,11 @@ import { isNotBlank } from "../../../../public/constants/utils";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
+import { apiAuthenticate, apiGetServerByUser, apiPreLogin } from "../apiCalls";
 
 export default function LoginForm() {
 
+  let API = require('../../global/hostApi');
   const language = useSelector((state: RootState) => state.language.value);
   const translate = useTranslations();
   const router = useRouter();
@@ -30,34 +32,27 @@ export default function LoginForm() {
     return isNotBlank(password);
   }
 
-  const preLogin = async (endpoint: string) => {
+  const preLogin = async () => {
 
     let preloginPayload = {
       username: username,
       password: password
     }
 
-    const responsePrelogin = await fetch(`${endpoint}/backoffice/preLogin`, {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-        'access-control-request-headers': 'X-AUTH-TOKEN',
-        'X-Requested-With': 'com.salubermd.mobile'
-      },
-      body: JSON.stringify(preloginPayload),
-    });
-
-    const dataPrelogin = await responsePrelogin.json();
-    if(dataPrelogin.esito === "3") {
-      authenticate(endpoint);
+    const response = await apiPreLogin(preloginPayload);
+    if(response){
+      if(response.esito === "3") {
+        authenticate();
+      }else{
+        setErrorMessage(translate("bad_credentials_description"));
+        setLoading(false);
+      }
     }else{
       setErrorMessage(translate("bad_credentials_description"));
-      setLoading(false);
     }
   }
 
-  const authenticate = async (endpoint: string) => {
+  const authenticate = async () => {
 
     let loginPayload = {
       username: username,
@@ -65,53 +60,37 @@ export default function LoginForm() {
       'code': '000000'
     }
 
-    const responseLogin = await fetch(`${endpoint}/backoffice/auth`, {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-        'access-control-request-headers': 'X-AUTH-TOKEN'
-      },
-      body: JSON.stringify(loginPayload),
-    });
-
-    if(responseLogin.status != 200) {
+    const response = await apiAuthenticate(loginPayload);
+    if(response.status != 200) {
       setErrorMessage(translate("bad_credentials_description"));
       setLoading(false);
     }else{
-      const token = responseLogin.headers.get('x-auth-token');
+      let { hostAPI } = require('../../global/hostApi'); 
+      const token = response.headers.get('x-auth-token');
       localStorage.setItem("X-AUTH-TOKEN",token || "");
-      localStorage.setItem("server", endpoint);
-      router.push(`/${language}/doctor`);
-    }    
-    const dataLogin = await responseLogin.json();
+      localStorage.setItem("server", hostAPI);
+      router.push(`/${language}/doctor/home`);
+    } 
   }
 
   const onPressLogin = async () => {
-    let server = localStorage.getItem("server");
+    let checkPayload = {
+      username: username,
+      email: username
+    }
+
     if(!loading) {
       setLoading(true);
       setErrorMessage("");
-      const responseGetServer = await fetch(`${server}shared/getServerByUser`, {
-        method: 'POST',
-        headers: {
-          accept: 'application/json, text/plain, */*',
-          'content-type': 'application/json;charset=UTF-8',
-          'x-requested-with': 'com.salubermd.mobile'
-        },
-        body: JSON.stringify({ 
-          username: username,
-          email: username 
-        }),
-      });
-      
-      const dataGetServerByUser = await responseGetServer.json();
-      if(Object.keys(dataGetServerByUser).length === 0) {
+      const response = await apiGetServerByUser(checkPayload);
+      if(Object.keys(response).length === 0) {
         setErrorMessage(translate("bad_credentials_description"));
         setLoading(false);
       }else{
-        let endpoint = dataGetServerByUser.endpoint;
-        preLogin(endpoint);
+        let endpoint = response.endpoint;
+        localStorage.setItem("server", endpoint);
+        API.hostAPI = endpoint;
+        preLogin();
       }
     }
   };

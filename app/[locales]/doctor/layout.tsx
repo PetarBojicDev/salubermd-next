@@ -12,7 +12,7 @@ export default async function DoctorLayout({
     <>
       <Header/>
       <Drawer/>
-      <div className="pt-20">
+      <div className="md:pt-20 pt-16 bg-background absolute z-5 w-full h-full">
         {children}
       </div>  
     </>

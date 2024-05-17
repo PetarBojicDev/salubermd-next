@@ -26,5 +26,8 @@
     "decline": "Decline",
     "accept" : "I Accept",
     "terms_conditions": "Terms and Conditions",
-    "privacy_policy": "Privacy Policy"
+    "privacy_policy": "Privacy Policy",
+    "welcome_back": "Welcome Back",
+    "your_profile": "Your profile",
+    "logout": "Logout"
 }
