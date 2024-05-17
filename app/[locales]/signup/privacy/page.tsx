@@ -8,8 +8,7 @@ import { useTranslations } from 'next-intl';
 import Button from '../../components/Button';
 
 const Page = () => {
-    
-    const {terms} = useSelector((state: RootState) => state.signUp.data);
+    const {privacy} = useSelector((state: RootState) => state.signUp.data);
     const translate = useTranslations();
     const [loading, setLoading] = useState(false);
     const [scrollBottomReached, setScrollBottomReached] = useState(false);
@@ -45,11 +44,11 @@ const Page = () => {
                     />
                 </div>
                 <div className='my-10 font-extrabold text-2xl'>
-                    {translate("terms_conditions")}
+                    {translate("privacy_policy")}
                 </div>
                 <div className="text-left mb-20">
-                    {terms && (
-                        <div dangerouslySetInnerHTML={{ __html: terms }} />
+                    {privacy && (
+                        <div dangerouslySetInnerHTML={{ __html: privacy }} />
                     )}
                 </div>
             </div>
@@ -65,7 +64,7 @@ const Page = () => {
                         onPress={() => {}}
                     />
                     <Button
-                        text={translate("accept")}
+                        text={translate("next")}
                         disabled={!scrollBottomReached}
                         buttonStyle="w-full md:w-32 h-10 rounded-xl text-gray-700"
                         disabledButtonStyle="w-full md:w-32 h-10 rounded-xl bg-gray-200 text-gray-700 " 

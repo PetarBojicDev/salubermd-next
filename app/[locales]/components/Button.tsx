@@ -13,7 +13,8 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ text, buttonStyle, enabledButtonStyle, disabledButtonStyle, disabled, loading, onPress }: ButtonProps) => {
 
   return (
-    <button className={`btn ${buttonStyle} ${!disabled ? disabledButtonStyle : enabledButtonStyle}`} type="button" onClick={onPress}>
+    <button className={`btn ${buttonStyle} ${disabled ? disabledButtonStyle : enabledButtonStyle}`} 
+      type="button" onClick={onPress} style={{ pointerEvents: disabled ? 'none' : 'auto'  }}>
       {loading ? <span className="loading loading-spinner loading-md"></span> : text}
     </button>
   );

@@ -22,5 +22,9 @@
     "online": "IN LINEA",
     "offline": "DISCONNESSA",
     "home": "Home page",
-    "agenda": "Ordine"
+    "agenda": "Ordine",
+    "decline": "Declino",
+    "accept" : "Accetto",
+    "terms_conditions": "Termini e Condizioni",
+    "privacy_policy": "Politica sulla riservatezza"
 }

@@ -149,7 +149,7 @@ export default function LoginForm() {
         />
         <Button
           text={translate("login")}
-          disabled={validatePassword() && validateUsername()}
+          disabled={!validatePassword() || !validateUsername()}
           buttonStyle="w-4/5 mx-auto mt-7 h-10 rounded-xl hover:bg-dark-blue"
           disabledButtonStyle="bg-gray-light text-gray"
           enabledButtonStyle="bg-blue text-white"

@@ -22,5 +22,9 @@
     "online": "ONLINE",
     "offline": "OFFLINE",
     "home": "Home",
-    "agenda":"Agenda"
+    "agenda":"Agenda",
+    "decline": "Decline",
+    "accept" : "I Accept",
+    "terms_conditions": "Terms and Conditions",
+    "privacy_policy": "Privacy Policy"
 }
