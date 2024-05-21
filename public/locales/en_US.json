@@ -29,5 +29,8 @@
     "privacy_policy": "Privacy Policy",
     "welcome_back": "Welcome Back",
     "your_profile": "Your profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "enter_credentials": "Enter Your Credentials",
+    "language": "Language",
+    "select": "Select"
 }

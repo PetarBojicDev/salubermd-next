@@ -11,7 +11,7 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Modal from "../../components/Modal";
-import { apiGetServerByCode, apiPostCheckEmail, callAPILsLanguage } from "../apiCalls";
+import { apiGetServerByCode, apiPostCheckEmail } from "../apiCalls";
 import { useRouter } from "next/navigation";
 import { saveSignUpInfo } from "@/store/states/signup";
 

@@ -6,13 +6,17 @@ import { useSelector } from 'react-redux';
 import LoginLogo from "../../../../public/images/login-logo.png";
 import { useTranslations } from 'next-intl';
 import Button from '../../components/Button';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     
     const {terms} = useSelector((state: RootState) => state.signUp.data);
     const translate = useTranslations();
     const [loading, setLoading] = useState(false);
+    const [loading1, setLoading1] = useState(false);
     const [scrollBottomReached, setScrollBottomReached] = useState(false);
+    const language = useSelector((state: RootState) => state.language.value);
+    const router = useRouter();
 
     useEffect(() => {
         function handleScroll() {
@@ -61,8 +65,11 @@ const Page = () => {
                         buttonStyle="w-full md:w-32 h-10 rounded-xl bg-gray-300 text-gray-700 border-2 border-gray-200 mb-2"
                         disabledButtonStyle="bg-white text-gray-500"
                         enabledButtonStyle="bg-white text-gray-700"
-                        loading={loading}
-                        onPress={() => {}}
+                        loading={loading1}
+                        onPress={() => {
+                            setLoading1(true);
+                            router.push(`/${language}/signup`);
+                        }}
                     />
                     <Button
                         text={translate("accept")}
@@ -71,7 +78,10 @@ const Page = () => {
                         disabledButtonStyle="w-full md:w-32 h-10 rounded-xl bg-gray-200 text-gray-700 " 
                         enabledButtonStyle="w-full md:w-32 h-10 rounded-xl bg-blue text-white hover:bg-dark-blue"
                         loading={loading}
-                        onPress={() => {}}
+                        onPress={() => {
+                            setLoading(true);
+                            router.push(`/${language}/signup/privacy`);
+                        }}
                     />
                 </div>
             </div>

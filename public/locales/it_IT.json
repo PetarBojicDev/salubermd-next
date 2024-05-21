@@ -29,5 +29,8 @@
     "privacy_policy": "Politica sulla riservatezza",
     "welcome_back": "Bentornato",
     "your_profile": "Il tuo profilo",
-    "logout": "Disconnettersi"
+    "logout": "Disconnettersi",
+    "enter_credentials": "Inserisci le tue credenziali",
+    "language": "Lingua",
+    "select": "Selezionare"
 }
