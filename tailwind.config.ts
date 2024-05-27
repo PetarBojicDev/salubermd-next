@@ -30,6 +30,8 @@ const config: Config = {
       'sidebar-blue': '#2c64cd',
       'sidebar-divider': '#7aa5f5',
       'darker-blue': '#2354ad',
+      'gray-card': '#d4d4d4',
+      'gray-hover': '#f2f2f2',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

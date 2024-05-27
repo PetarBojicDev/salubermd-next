@@ -1,13 +1,15 @@
 import { RootState } from "@/store/store";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdCalendarMonth, MdLogout } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import { clearState } from "@/store/states/clear";
 
 const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
 
+  const dispatch = useDispatch();
   const router = useRouter(); 
   const translate = useTranslations();
   const path = usePathname();
@@ -31,7 +33,8 @@ const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
   const navigateToRoot = () => {
     if(type == "logout") {
       localStorage.removeItem("X-AUTH-TOKEN");
-      localStorage.setItem("server","https://wseu.salubermd.com/backoffice/");
+      localStorage.setItem("server","https://wseu.salubermd.com");
+      dispatch(clearState());
       router.push(`/${language}/login`);
     }else{
       router.push(`/${language}/doctor/${type}`);
