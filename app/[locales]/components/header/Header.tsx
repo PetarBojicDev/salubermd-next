@@ -4,6 +4,7 @@ import LoginLogo from "../../../../public/images/login-logo.png";
 import LanguageSwitcher from "../LanguageSwitcher";
 import DrawerOpener from "./DrawerOpener";
 import OnlineStatusContainer from "./OnlineStatusContainer";
+import "server-only";
 
 export default function Header() {
 

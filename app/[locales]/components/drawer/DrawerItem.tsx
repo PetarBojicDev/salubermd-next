@@ -6,7 +6,6 @@ import { MdCalendarMonth, MdLogout } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
 import { clearState } from "@/store/states/clear";
-
 const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
 
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
   const translate = useTranslations();
   const path = usePathname();
   const isActive = path.includes(type);
-  const drawerOpenedStatus = useSelector((state: RootState) => state.userInfo.drawerOpenedStatus);
   const language = useSelector((state: RootState) => state.language.value);
 
   const renderIcon = () => {
@@ -43,7 +41,7 @@ const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
 
   return (
     <>
-      <div className={`h-20 hover:bg-darker-blue items-center inline-flex ${drawerOpenedStatus ? "opacity-100" : "opacity-0"} ${isActive ? "bg-blue" : "bg-dark-blue"} w-full`} 
+      <div className={`h-20 hover:bg-darker-blue items-center inline-flex ${isActive ? "bg-blue" : "bg-dark-blue"} w-full`} 
         style={{ transition: "opacity 0.1s ease-in-out"}} onClick={() => navigateToRoot()}>
         <div className="ml-10 inline-flex">
           {renderIcon()}

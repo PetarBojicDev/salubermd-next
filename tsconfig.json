@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components": ["./app/[locales]/components"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", "public/constants/languages.ts", "lib/hooks.ts", "lib/store.ts", "app/[locales]/StoreProvider.tsx", "app/[locales]/global/hostApi.ts"],
