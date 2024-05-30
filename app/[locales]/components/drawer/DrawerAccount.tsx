@@ -1,10 +1,9 @@
 import { useTranslations } from "next-intl";
-import React, { useContext } from "react";
-import { MainContext } from "../ContextProvider";
+import React from "react";
+import "server-only";
 
 export default function DrawerAccount() {
 
-  const { openedDrawer } = useContext(MainContext);
   const translate = useTranslations();
 
   return (

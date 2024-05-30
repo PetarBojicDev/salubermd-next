@@ -1,3 +1,4 @@
+"use client";
 import { RootState } from "@/store/store";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -6,17 +7,19 @@ import { MdCalendarMonth, MdLogout } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
 import { clearState } from "@/store/states/clear";
-const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
+import { DrawerItemProp } from "@/public/constants/props";
+
+const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
 
   const dispatch = useDispatch();
   const router = useRouter(); 
   const translate = useTranslations();
   const path = usePathname();
-  const isActive = path.includes(type);
+  const isActive = path.includes(route);
   const language = useSelector((state: RootState) => state.language.value);
 
   const renderIcon = () => {
-    switch(type){
+    switch(title){
       case "home":
         return <FaHome className="text-white" size={30}></FaHome>;
       case "agenda":
@@ -28,24 +31,24 @@ const DrawerItem: React.FC<{ type: string }> = ({ type }) => {
     }
   }
 
-  const navigateToRoot = () => {
-    if(type == "logout") {
+  const navigateToRoute = () => {
+    if(title == "logout") {
       localStorage.removeItem("X-AUTH-TOKEN");
       localStorage.setItem("server","https://wseu.salubermd.com");
       dispatch(clearState());
       router.push(`/${language}/login`);
     }else{
-      router.push(`/${language}/doctor/${type}`);
+      router.push(`/${language}/doctor/${title}`);
     }
   }
 
   return (
     <>
       <div className={`h-20 hover:bg-darker-blue items-center inline-flex ${isActive ? "bg-blue" : "bg-dark-blue"} w-full`} 
-        style={{ transition: "opacity 0.1s ease-in-out"}} onClick={() => navigateToRoot()}>
+        style={{ transition: "opacity 0.1s ease-in-out"}} onClick={() => navigateToRoute()}>
         <div className="ml-10 inline-flex">
           {renderIcon()}
-          <span className={`${type == "logout" ? "text-sidebar-divider" : "text-white" } font-semibold ml-5 text-xl`}>{translate(type)}</span>
+          <span className={`${title == "logout" ? "text-sidebar-divider" : "text-white" } font-semibold ml-5 text-xl`}>{translate(title)}</span>
         </div>
         
       </div>
