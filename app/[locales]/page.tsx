@@ -1,27 +1,26 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import * as languages from "../../public/constants/languages";
-import { useDispatch } from "react-redux";
-import { setLanguage } from "../../store/states/language"; 
+import { MainContext } from "./components/ContextProvider";
 
 export default function Splash() {
 
+  const { language, setLanguage } = useContext(MainContext);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const browserLanguage: string = navigator.language.split("-")[0];
-    const language = languages.array.find((x) => x.value === browserLanguage)?.language;
+    const languageFound = languages.array.find((x) => x.value === browserLanguage)?.language;
     localStorage.setItem("server","https://wseu.salubermd.com/backoffice/");
 
     if(localStorage.getItem("X-AUTH-TOKEN")) {
       router.push(`/${language}/doctor/home`);
     }else{
-      dispatch(setLanguage(language || "en_US"));
+      setLanguage(languageFound || "en_US");
       setTimeout(() => {
-        router.push(`/${language}/login`);
+        router.push(`/${languageFound}/login`);
       }, 2500);
     }
   },[]);

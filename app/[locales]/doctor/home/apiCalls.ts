@@ -1,7 +1,5 @@
-export const fetchDoctorHomepageData = async () => {
+export const fetchDoctorHomepageData = async (server: string, token: string) => {
     let uuid = "temp";
-    let server = localStorage.getItem("server");
-    let token = localStorage.getItem("X-AUTH-TOKEN");
     try {
         const response = await fetch(`${server}/backoffice/getDoctorData/${uuid}`, {
           method: 'GET',

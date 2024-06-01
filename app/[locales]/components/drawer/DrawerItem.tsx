@@ -1,22 +1,20 @@
 "use client";
-import { RootState } from "@/store/store";
 import { useTranslations } from "next-intl";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { MdCalendarMonth, MdLogout } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
-import { clearState } from "@/store/states/clear";
 import { DrawerItemProp } from "@/public/constants/props";
+import { MainContext } from "../ContextProvider";
 
 const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
 
-  const dispatch = useDispatch();
+  const { language, setToken, setServer } = useContext(MainContext);
+
   const router = useRouter(); 
   const translate = useTranslations();
   const path = usePathname();
   const isActive = path.includes(route);
-  const language = useSelector((state: RootState) => state.language.value);
 
   const renderIcon = () => {
     switch(title){
@@ -33,9 +31,8 @@ const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
 
   const navigateToRoute = () => {
     if(title == "logout") {
-      localStorage.removeItem("X-AUTH-TOKEN");
-      localStorage.setItem("server","https://wseu.salubermd.com");
-      dispatch(clearState());
+      setToken("");
+      setServer("https://wseu.salubermd.com");
       router.push(`/${language}/login`);
     }else{
       router.push(`/${language}/doctor/${title}`);

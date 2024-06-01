@@ -37,10 +37,9 @@ export const apiGetServerByUser = async (payload: UserPayload) => {
   }
 }
 
-export const apiPreLogin = async (payload: PreLoginPayload) => {
-  let { hostAPI } = require('../global/hostApi'); 
+export const apiPreLogin = async (server: string, payload: PreLoginPayload) => {
   try {
-      const response = await fetch(`${hostAPI}/backoffice/preLogin`, {
+      const response = await fetch(`${server}/backoffice/preLogin`, {
         method: 'POST',
         headers: {
           Accept: '*/*',
@@ -62,10 +61,10 @@ export const apiPreLogin = async (payload: PreLoginPayload) => {
   }
 }
 
-export const apiAuthenticate = async (payload: LoginPayload) => {
+export const apiAuthenticate = async (server: string, payload: LoginPayload) => {
   let { hostAPI } = require('../global/hostApi'); 
   try {
-      const response = await fetch(`${hostAPI}/backoffice/auth`, {
+      const response = await fetch(`${server}/backoffice/auth`, {
         method: 'POST',
         headers: {
           Accept: '*/*',

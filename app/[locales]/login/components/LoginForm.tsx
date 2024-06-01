@@ -1,21 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import LoginLogo from "../../../../public/images/login-logo.png";
 import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { isNotBlank } from "../../../../public/constants/utils";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { isNotBlank, setCookie } from "../../../../public/constants/utils";
 import { useRouter } from "next/navigation";
 import { apiAuthenticate, apiGetServerByUser, apiPreLogin } from "../apiCalls";
+import { MainContext } from "../../components/ContextProvider";
 
 export default function LoginForm() {
 
-  let API = require('../../global/hostApi');
-  const language = useSelector((state: RootState) => state.language.value);
+  const { language, server, setToken, setServer } = useContext(MainContext);
   const translate = useTranslations();
   const router = useRouter();
 
@@ -39,7 +37,7 @@ export default function LoginForm() {
       password: password
     }
 
-    const response = await apiPreLogin(preloginPayload);
+    const response = await apiPreLogin(server, preloginPayload);
     if(response){
       if(response.esito === "3") {
         authenticate();
@@ -60,17 +58,19 @@ export default function LoginForm() {
       'code': '000000'
     }
 
-    const response = await apiAuthenticate(loginPayload);
-    if(response.status != 200) {
-      setErrorMessage(translate("bad_credentials_description"));
-      setLoading(false);
-    }else{
-      let { hostAPI } = require('../../global/hostApi'); 
-      const token = response.headers.get('x-auth-token');
-      localStorage.setItem("X-AUTH-TOKEN",token || "");
-      localStorage.setItem("server", hostAPI);
-      router.push(`/${language}/doctor/home`);
-    } 
+    setTimeout(async () => {
+      const response = await apiAuthenticate(server, loginPayload);
+
+      if(response.status != 200) {
+        setErrorMessage(translate("bad_credentials_description"));
+        setLoading(false);
+      }else{
+        const token = response.headers.get('x-auth-token');
+        setToken(token || "");
+        setCookie('token', token, 7);
+        router.push(`/${language}/doctor/home`);
+      } 
+    },1000);
   }
 
   const onPressLogin = async () => {
@@ -83,13 +83,13 @@ export default function LoginForm() {
       setLoading(true);
       setErrorMessage("");
       const response = await apiGetServerByUser(checkPayload);
+      console.log(response);
       if(Object.keys(response).length === 0) {
         setErrorMessage(translate("bad_credentials_description"));
         setLoading(false);
       }else{
         let endpoint = response.endpoint;
-        localStorage.setItem("server", endpoint);
-        API.hostAPI = endpoint;
+        setServer(endpoint);
         preLogin();
       }
     }
