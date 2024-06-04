@@ -90,6 +90,7 @@ export default function LoginForm() {
       }else{
         let endpoint = response.endpoint;
         setServer(endpoint);
+        setCookie("server", endpoint);
         preLogin();
       }
     }

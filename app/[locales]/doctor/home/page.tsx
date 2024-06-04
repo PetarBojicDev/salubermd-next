@@ -1,19 +1,20 @@
-import "server-only";
-import React from "react";
-import styles from "./home.module.css";
-import VisitsClient from "./components/VisitsClient";
+"server-only";
+import React, { Suspense } from "react";
 import Visits from "./components/visits/Visits";
+import styles from "./home.module.css";
+import TemplateVisits from "./components/visits/TemplateVisits";
 
 export default function Home() {
 
   return (
     <div className="mx-auto w-full h-full bg-background inline-flex p-5">
       <div className={`h-full block ${styles.width67}`}>
-        <VisitsClient>
+        <Suspense fallback={<TemplateVisits/>}>
           <Visits/>
-        </VisitsClient>
+        </Suspense>
         <div className={`w-full ${styles.height5}`}></div>
       </div>
+      <div className={`h-full ${styles.width2}`}></div>
     </div>
   );
 }

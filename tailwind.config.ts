@@ -32,6 +32,7 @@ const config: Config = {
       'darker-blue': '#2354ad',
       'gray-card': '#d4d4d4',
       'gray-hover': '#f2f2f2',
+      'gray-card-text': '#ababab'
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
