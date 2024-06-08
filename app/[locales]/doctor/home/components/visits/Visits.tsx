@@ -1,8 +1,8 @@
-  import React, { Suspense } from "react";
-  import "server-only";
-  import { cookies } from 'next/headers';
-import TemplateVisits from "./TemplateVisits";
+import React from "react";
+import "server-only";
+import { cookies } from 'next/headers';
 import VisitDetail from "./VisitDetail";
+import styles from '../../home.module.css';
 
 async function getRecentVisits(server: string, token: string) {
   const response = await fetch(`${server}/backoffice/getDoctorData/temp`, {
@@ -19,7 +19,7 @@ async function getRecentVisits(server: string, token: string) {
   const recentVisits = data.visitsHistory;
   const slicedRecentVisits = recentVisits.slice(0, 4);
 
-  // Move the delay to be executed after data processing
+  //put this here just to see suspense
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   await delay(3000);
 
@@ -34,17 +34,14 @@ async function getRecentVisits(server: string, token: string) {
     const pastVisits = await getRecentVisits(server, token);
 
     return (
-      <div>
-        <div className="inline-flex w-full h-5/6">
+      <div className={`inline-flex w-full ${styles.height25}`}>
         {
           pastVisits.map((element, index) => {
-            console.log(element);
             return (
               <VisitDetail key={index} visit={element}/>
             );
           })
         }
-        </div>
       </div>
     );
   }
