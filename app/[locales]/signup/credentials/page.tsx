@@ -1,16 +1,16 @@
-'use client';
-import { isNotBlank } from '@/public/constants/utils';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+"use client";
+import { isNotBlank } from "@/public/constants/utils";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import LoginLogo from "../../../../public/images/login-logo.png";
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import InputWithTitle from '../../components/InputWithTitle';
-import Button from '../../components/Button';
-import Image from 'next/image';
-import { RootState } from '@/store/store';
-import { callAPILsLanguage } from '../apiCalls';
-import DropDownList from '../../components/DropDownList';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import InputWithTitle from "../../components/InputWithTitle";
+import Button from "../../components/Button";
+import Image from "next/image";
+import { RootState } from "@/store/store";
+import { callAPILsLanguage } from "../apiCalls";
+import DropDownList from "../../components/DropDownList";
 
 const Page = () => {
   const translate = useTranslations();
@@ -27,7 +27,7 @@ const Page = () => {
 
   useEffect(() => {
     fetchLanguages();
-  }, [])
+  }, []);
 
   const fetchLanguages = async () => {
     const res = await callAPILsLanguage();
@@ -36,23 +36,23 @@ const Page = () => {
     } else {
       setErrorMessage(translate("server_error"));
     }
-  }
+  };
 
   const validateEmail = () => {
     return isNotBlank(email);
-  }
+  };
 
   const validateUsername = () => {
     return isNotBlank(username);
-  }
+  };
 
   const validatePassword = () => {
     return isNotBlank(password);
-  }
+  };
 
   const validateLanguage = () => {
     return isNotBlank(chosenLan);
-  }
+  };
 
   return (
     <div className="bg-white flex items-center justify-center">
@@ -60,10 +60,12 @@ const Page = () => {
         <Image
           src={LoginLogo}
           alt="Login logo"
-          className="w-2/5 mx-auto pt-5"
+          className="w-2/5 mr-auto pt-5"
           priority
         />
-        <span className="font-bold text-xl text-center block my-3">{translate("enter_credentials")}</span>
+        <span className="font-bold text-xl block my-3">
+          {translate("enter_credentials")}
+        </span>
         <InputWithTitle
           titleLeft={`${translate("username")}*`}
           iconRight=""
@@ -95,7 +97,7 @@ const Page = () => {
           titleStyle="text-left text-sm font-bold"
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
-         <DropDownList
+        <DropDownList
           list={languages}
           titleLeft={`${translate("language")}*`}
           iconRight=""
@@ -109,8 +111,13 @@ const Page = () => {
         />
         <Button
           text={translate("next")}
-          disabled={!validateEmail() || !validateUsername() || !validatePassword() || !validateLanguage()}
-          buttonStyle="w-full mt-7 rounded-xl hover:bg-dark-blue"
+          disabled={
+            !validateEmail() ||
+            !validateUsername() ||
+            !validatePassword() ||
+            !validateLanguage()
+          }
+          buttonStyle="w-1/4 mt-7 rounded-xl hover:bg-dark-blue"
           disabledButtonStyle="bg-gray-light text-gray"
           enabledButtonStyle="bg-blue text-white"
           loading={loading}
@@ -127,6 +134,6 @@ const Page = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Page;
