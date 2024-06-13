@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import LoginLogo from "../../../../public/images/login-logo.png";
 import InputWithTitle from "../../components/InputWithTitle";
@@ -13,14 +13,21 @@ import { MainContext } from "../../components/ContextProvider";
 
 export default function LoginForm() {
 
-  const { language, server, setToken, setServer } = useContext(MainContext);
+  const { language, setToken } = useContext(MainContext);
   const translate = useTranslations();
   const router = useRouter();
 
+  const [server, setServer] = useState();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(server) {
+      preLogin();
+    }
+  },[server]);
 
   const validateUsername = () => {
     return isNotBlank(username);
@@ -83,7 +90,6 @@ export default function LoginForm() {
       setLoading(true);
       setErrorMessage("");
       const response = await apiGetServerByUser(checkPayload);
-      console.log(response);
       if(Object.keys(response).length === 0) {
         setErrorMessage(translate("bad_credentials_description"));
         setLoading(false);
@@ -91,7 +97,6 @@ export default function LoginForm() {
         let endpoint = response.endpoint;
         setServer(endpoint);
         setCookie("server", endpoint);
-        preLogin();
       }
     }
   };
