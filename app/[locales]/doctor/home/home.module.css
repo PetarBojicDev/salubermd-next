@@ -6,6 +6,22 @@
 	width: 2%;
 }
 
+.width1 {
+	width: 1%;
+}
+
+.width3 {
+	width: 3%;
+}
+
+.width32 {
+	width: 32%;
+}
+
+.width31 {
+	width: 31%;
+}
+
 .width30 {
 	width: 30%;
 }
@@ -36,4 +52,20 @@
 
 .width80 {
 	width: 80%;
+}
+
+.height95 {
+	height: 95%;
+}
+
+.height2 {
+	height: 2%;
+}
+
+.height10 {
+	height: 10%;
+}
+
+.height90 {
+	height: 90%;
 }

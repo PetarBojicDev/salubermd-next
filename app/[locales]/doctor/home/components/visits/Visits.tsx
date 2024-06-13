@@ -4,6 +4,11 @@ import { cookies } from 'next/headers';
 import VisitDetail from "./VisitDetail";
 import styles from '../../home.module.css';
 
+interface LabelProps {
+  labelVisits: string;
+  labelSeeAll: string;
+}
+
 async function getRecentVisits(server: string, token: string) {
   const response = await fetch(`${server}/backoffice/getDoctorData/temp`, {
     method: 'GET',
@@ -26,7 +31,7 @@ async function getRecentVisits(server: string, token: string) {
   return slicedRecentVisits;
 }
 
-  export default async function Visits() {
+  export default async function Visits({labelVisits, labelSeeAll} : LabelProps) {
 
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
@@ -34,14 +39,21 @@ async function getRecentVisits(server: string, token: string) {
     const pastVisits = await getRecentVisits(server, token);
 
     return (
-      <div className={`inline-flex w-full ${styles.height25}`}>
-        {
-          pastVisits.map((element, index) => {
-            return (
-              <VisitDetail key={index} visit={element}/>
-            );
-          })
-        }
+      <div  className={`${styles.height25}`}>
+        <div className="h-1/6 inline-flex justify-between w-full">
+            <label className="font-bold text-md">{labelVisits}</label>
+            {pastVisits.length > 0 && 
+            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{labelSeeAll}</label>}
+        </div>
+        <div className={`inline-flex w-full h-5/6`}>
+          {
+            pastVisits.map((element, index) => {
+              return (
+                <VisitDetail key={index} visit={element}/>
+              );
+            })
+          }
+        </div>
       </div>
     );
   }
