@@ -62,28 +62,19 @@ async function getTodayActivities(server: string, token: string) {
     const renderSlots = (avAM, avPM, apAM, apPM) => {
 
       return (
-        <div className={`${styles.height25}`}>
-          <div className="h-1/6 inline-flex justify-between w-full">
-              <label className="font-bold text-md">{labelActivities}</label>
-              {slots.length > 0 && 
-            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{labelSeeAll}</label>}
+        <div className="h-full bg-white rounded-lg shadow-md w-full inline-flex">
+          <div className="w-1/2">
+            <div className="pl-3 pt-8 inline-grid w-full">
+              <label className="text-xs text-gray">{todayAM}</label>
+              <label className="text-lg font-bold text-online">{avAM.length != 0 ? (avAM.length + " " + labelSlots) : labelNoSlots}</label>
+              <label className="text-md">{apAM.length != 0 ? (apAM.length + " " + labelAppointments) : labelNoAppointments} </label>
+            </div>
           </div>
-          <div className="w-full h-5/6">
-            <div className="h-full bg-white rounded-lg shadow-md w-full inline-flex">
-              <div className="w-1/2">
-                <div className="pl-3 pt-8 inline-grid w-full">
-                  <label className="text-xs text-gray">{todayAM}</label>
-					        <label className="text-lg font-bold text-online">{avAM.length != 0 ? (avAM.length + " " + labelSlots) : labelNoSlots}</label>
-					        <label className="text-md">{apAM.length != 0 ? (apAM.length + " " + labelAppointments) : labelNoAppointments} </label>
-                </div>
-              </div>
-              <div className="w-1/2">
-              <div className="pl-3 pt-8 inline-grid w-full">
-                  <label className="text-xs text-gray">{todayPM}</label>
-					        <label className="text-lg font-bold text-online">{avPM.length != 0 ? (avPM.length + " " + labelSlots) : labelNoSlots}</label>
-					        <label className="text-md">{apPM.length != 0 ? (apPM.length + " " + labelAppointments) : labelNoAppointments} </label>
-                </div>
-						  </div>
+          <div className="w-1/2">
+            <div className="pl-3 pt-8 inline-grid w-full">
+              <label className="text-xs text-gray">{todayPM}</label>
+              <label className="text-lg font-bold text-online">{avPM.length != 0 ? (avPM.length + " " + labelSlots) : labelNoSlots}</label>
+              <label className="text-md">{apPM.length != 0 ? (apPM.length + " " + labelAppointments) : labelNoAppointments} </label>
             </div>
           </div>
         </div>
@@ -114,11 +105,18 @@ async function getTodayActivities(server: string, token: string) {
 			}
 
 			return (
-				<>
-				{(listAvailabilityTodayAM.length != 0 || listAvailabilityTodayPM.length != 0) ? 
-				renderSlots(listAvailabilityTodayAM, listAvailabilityTodayPM, listAppointmentTodayAM, listAppointmentTodayPM) : 
-				renderNoSlots()}
-				</> 
+        <div className={`${styles.height25}`}>
+          <div className="h-1/6 inline-flex justify-between w-full">
+              <label className="font-bold text-md">{labelActivities}</label>
+              {slots.length > 0 && 
+            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{labelSeeAll}</label>}
+          </div>
+          <div className="w-full h-5/6">
+            {(listAvailabilityTodayAM.length != 0 || listAvailabilityTodayPM.length != 0) ? 
+              renderSlots(listAvailabilityTodayAM, listAvailabilityTodayPM, listAppointmentTodayAM, listAppointmentTodayPM) : 
+              renderNoSlots()}
+          </div>
+        </div>
 			)
 		}
 

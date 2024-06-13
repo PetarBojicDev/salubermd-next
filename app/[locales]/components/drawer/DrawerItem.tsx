@@ -9,7 +9,7 @@ import { MainContext } from "../ContextProvider";
 
 const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
 
-  const { language, setToken, setServer } = useContext(MainContext);
+  const { language, setToken, setServer, setOpenedDrawer } = useContext(MainContext);
 
   const router = useRouter(); 
   const translate = useTranslations();
@@ -33,6 +33,7 @@ const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
     if(title == "logout") {
       setToken("");
       setServer("https://wseu.salubermd.com");
+      setOpenedDrawer(false);
       router.push(`/${language}/login`);
     }else{
       router.push(`/${language}/doctor/${title}`);

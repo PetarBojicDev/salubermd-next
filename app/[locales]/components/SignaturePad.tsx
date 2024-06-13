@@ -25,7 +25,6 @@ const SignaturePad: React.FC<SignaturePadProps> = ({
 
   const save = () => {
     const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-    console.log(dataURL);
     setSignature(dataURL);
   };
 

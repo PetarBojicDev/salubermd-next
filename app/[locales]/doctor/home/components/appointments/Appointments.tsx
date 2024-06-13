@@ -22,7 +22,6 @@ async function getAppointments(server: string, token: string) {
   }
 
   const data = await response.json();
-  console.log(data);
 
   //put this here just to see suspense
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
