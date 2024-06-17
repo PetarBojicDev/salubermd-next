@@ -71,5 +71,6 @@
   "submit": "Invia",
   "back": "Indietro",
   "clear": "Chiara",
-  "save": "Salva"
+  "save": "Salva",
+  "no_available_appointments": "Nessun appuntamento disponibile"
 }

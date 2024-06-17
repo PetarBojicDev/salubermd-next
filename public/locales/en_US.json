@@ -71,5 +71,6 @@
   "submit": "Submit",
   "back": "Back",
   "clear": "Clear",
-  "save": "Save"
+  "save": "Save",
+  "no_available_appointments": "No available appointments"
 }
