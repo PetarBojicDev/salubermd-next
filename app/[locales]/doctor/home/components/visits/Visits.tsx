@@ -3,10 +3,10 @@ import "server-only";
 import { cookies } from 'next/headers';
 import VisitDetail from "./VisitDetail";
 import styles from '../../home.module.css';
+import { VisitsTranslateObject } from "@/public/translate/translate";
 
-interface LabelProps {
-  labelVisits: string;
-  labelSeeAll: string;
+interface VisitsLabels {
+  visitsLabels: VisitsTranslateObject;
 }
 
 async function getRecentVisits(server: string, token: string) {
@@ -31,7 +31,7 @@ async function getRecentVisits(server: string, token: string) {
   return slicedRecentVisits;
 }
 
-  export default async function Visits({labelVisits, labelSeeAll} : LabelProps) {
+  export default async function Visits(visitsLabels : VisitsLabels) {
 
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
@@ -41,9 +41,9 @@ async function getRecentVisits(server: string, token: string) {
     return (
       <div  className={`${styles.height25}`}>
         <div className="h-1/6 inline-flex justify-between w-full">
-            <label className="font-bold text-md">{labelVisits}</label>
+            <label className="font-bold text-md">{visitsLabels.labelVisits}</label>
             {pastVisits.length > 0 && 
-            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{labelSeeAll}</label>}
+            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{visitsLabels.labelSeeAll}</label>}
         </div>
         <div className={`inline-flex w-full h-5/6`}>
           {

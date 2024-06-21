@@ -1,16 +1,19 @@
 import "server-only";
 import styles from "../../home.module.css";
+import { VisitsTranslateObject } from "@/public/translate/translate";
 
-interface LabelProps {
-    labelVisits: string;
-}
+interface VisitsLabels {
+    visitsLabels: VisitsTranslateObject;
+  }
 
-export default async function TemplateVisits({ labelVisits } : LabelProps) {
+export default async function TemplateVisits(visitsLabels : VisitsLabels) {
+
+  const labels = visitsLabels.visitsLabels;
 
   return (
     <div className={`${styles.height25}`}>
         <div className="h-1/6 inline-flex justify-between w-full">
-            <label className="font-bold text-md text-gray">{labelVisits}</label>
+            <label className="font-bold text-md text-gray">{labels.labelVisits}</label>
         </div>
         <div className={`inline-flex w-full h-5/6`}>
             <div className="w-1/4">
