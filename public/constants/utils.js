@@ -26,6 +26,25 @@ export function formatTimestampToDate(timestamp) {
   return `${dayString}/${monthString}/${year}`;
 }
 
+export function formatTimestampToDateWithTime(timestamp) {
+  const date = new Date(Number(timestamp));
+  
+  const options = { month: 'short', day: '2-digit' };
+  return date.toLocaleString('en-US', options);
+}
+
+export function formatTImestampToTime(timestamp) {
+  const date = new Date(Number(timestamp));
+
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  const hoursString = hours < 10 ? "0" + hours : hours;
+  const minutesString = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${hoursString}:${minutesString}`;
+}
+
 export function formatTimestampToHours(timestamp) {
   const date = new Date(Number(timestamp));
 

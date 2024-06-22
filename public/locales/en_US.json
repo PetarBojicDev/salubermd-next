@@ -40,7 +40,7 @@
   "no_recent_visits": "No recent visits",
   "no_recent_visits_desc": "This is the place for the most recent visits. Looks a bit empty now, but don't worry, by time you will start seeing you recent visits here.",
   "today_activities": "Today activities",
-  "no_available_slots": "No available slots",
+  "no_available_slots": "No available slots,",
   "add_first_availability": "Add your first availability here",
   "today": "Today",
   "today_am": "Today AM",
@@ -72,5 +72,13 @@
   "back": "Back",
   "clear": "Clear",
   "save": "Save",
-  "no_available_appointments": "No available appointments"
+  "no_available_appointments": "No available appointments",
+  "notifications": "Notifications",
+  "at": "at",
+  "no_visits_1": "This is the place for the most recent visits, looks a bit empty now, but ",
+  "no_visits_2": "don't worry, ",
+  "no_visits_3": "here are some tips ",
+  "no_visits_4": "on how to use them ;)",
+  "no_appointments_1": "You have no scheduled appointments yet, ",
+  "no_appointments_2": "on how to create your first appointment"
 }

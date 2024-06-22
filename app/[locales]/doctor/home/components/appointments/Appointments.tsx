@@ -3,11 +3,8 @@ import "server-only";
 import { cookies } from 'next/headers';
 import styles from '../../home.module.css';
 import AppointmentDetail from "./AppointmentDetail";
-
-interface LabelProps {
-  labelAppointments: string;
-  labelSeeAll: string;
-}
+import useTranslate from "@/public/translate/translate";
+import NoAppointments from "./NoAppointments";
 
 async function getAppointments(server: string, token: string) {
   let offSet = new Date().getTimezoneOffset();
@@ -30,28 +27,41 @@ async function getAppointments(server: string, token: string) {
   return data.slot;
 }
 
-  export default async function Appointments({labelAppointments, labelSeeAll}: LabelProps) {
+  export default async function Appointments() {
 
+    const { appointmentsLabels } = await useTranslate();
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
     const server = cookieStore.get("server")?.value;
-    const appointments = await getAppointments(server, token);
+    const appointments = await getAppointments(server || "", token || "");
+
+    const renderAppointments = (data: Object[]) => {
+      return (
+        <>
+          {data.map((element: Object, index: number) => {
+            return (
+              <AppointmentDetail key={index} appointment={element}/>
+            );
+          })}
+        </>
+      )
+    }
+
+    const renderNoAppointments = () => {
+      return (
+        <NoAppointments/>
+      )
+    }
 
     return (
       <div className={`block w-full pr-5 ${styles.height70}`}>
         <div className={`${styles.height5} inline-flex justify-between w-full`}>
-					<label className="font-bold text-md">{labelAppointments}</label>
+					<label className="font-bold text-md">{appointmentsLabels.labelAppointments}</label>
           {appointments.length > 0 && 
-          <label className="font-bold text-md text-blue hover:underline underline-offset-2">{labelSeeAll}</label>}
+          <label className="font-bold text-md text-blue hover:underline underline-offset-2">{appointmentsLabels.labelSeeAll}</label>}
 			  </div>
         <div className={`${styles.height95}`}>
-          {
-            appointments.map((element, index) => {
-              return (
-                <AppointmentDetail appointment={element}/>
-              );
-            })
-          }
+          {appointments.length > 0 ? renderAppointments(appointments) : renderNoAppointments()}
         </div>
     </div>
     );

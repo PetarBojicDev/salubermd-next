@@ -3,11 +3,8 @@ import "server-only";
 import { cookies } from 'next/headers';
 import VisitDetail from "./VisitDetail";
 import styles from '../../home.module.css';
-import { VisitsTranslateObject } from "@/public/translate/translate";
-
-interface VisitsLabels {
-  visitsLabels: VisitsTranslateObject;
-}
+import useTranslate from "@/public/translate/translate";
+import NoVisits from "./NoVisits";
 
 async function getRecentVisits(server: string, token: string) {
   const response = await fetch(`${server}/backoffice/getDoctorData/temp`, {
@@ -31,12 +28,31 @@ async function getRecentVisits(server: string, token: string) {
   return slicedRecentVisits;
 }
 
-  export default async function Visits(visitsLabels : VisitsLabels) {
+  export default async function Visits() {
 
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
     const server = cookieStore.get("server")?.value;
-    const pastVisits = await getRecentVisits(server, token);
+    const pastVisits = await getRecentVisits(server || "", token || "");
+    const { visitsLabels } = await useTranslate();
+
+    const renderVisits = (data: Object[]) => {
+      return (
+        <>
+          {data.map((element: Object, index: number) => {
+            return (
+              <VisitDetail key={index} visit={element}/>
+            );
+          })}
+        </>
+      )
+    }
+
+    const renderNoVisits = () => {
+      return (
+        <NoVisits/>
+      )
+    }
 
     return (
       <div  className={`${styles.height25}`}>
@@ -46,13 +62,7 @@ async function getRecentVisits(server: string, token: string) {
             <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{visitsLabels.labelSeeAll}</label>}
         </div>
         <div className={`inline-flex w-full h-5/6`}>
-          {
-            pastVisits.map((element, index) => {
-              return (
-                <VisitDetail key={index} visit={element}/>
-              );
-            })
-          }
+          {pastVisits.length > 0 ? renderVisits(pastVisits) : renderNoVisits()}
         </div>
       </div>
     );
