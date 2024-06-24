@@ -5,6 +5,7 @@ import styles from '../../home.module.css';
 import { formatTimestampToDate, formatTimestampToHours } from "@/public/constants/utils";
 import useTranslate from "@/public/translate/translate";
 import NoActivities from "./NoActivities";
+import NavigateLabel from "@/app/[locales]/components/NavigateLabel";
 
 async function getTodayActivities(server: string, token: string) {
   const response = await fetch(`${server}/backoffice/appointment?action=search`, {
@@ -106,7 +107,11 @@ async function getTodayActivities(server: string, token: string) {
           <div className="h-1/6 inline-flex justify-between w-full">
               <label className="font-bold text-md">{activitiesLabels.labelActivities}</label>
               {slots.length > 0 && 
-            <label className="font-bold text-md text-blue hover:underline underline-offset-2">{activitiesLabels.labelSeeAll}</label>}
+              <NavigateLabel 
+                style="font-bold text-md text-blue hover:underline underline-offset-2" 
+                route="doctor/agenda"
+                text={activitiesLabels.labelSeeAll}/>
+            }
           </div>
           <div className="w-full h-5/6">
             {(listAvailabilityTodayAM.length != 0 || listAvailabilityTodayPM.length != 0) ? 

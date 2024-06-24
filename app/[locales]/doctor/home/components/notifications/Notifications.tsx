@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import styles from '../../home.module.css';
 import useTranslate from "@/public/translate/translate";
 import NotificationDetail from "./NotificationDetail";
+import NavigateLabel from "@/app/[locales]/components/NavigateLabel";
 
 async function getNotifications(server: string, token: string) {
   let offSet = new Date().getTimezoneOffset();
@@ -42,9 +43,11 @@ async function getNotifications(server: string, token: string) {
 				<div className={`${styles.height5} inline-flex justify-between w-full`}>
 						<label className="font-bold text-md">{notificationsLabels.labelNotifications}</label>
 						{notifications.length > 0 && 
-          		<label className="font-bold text-md text-blue hover:underline underline-offset-2">
-								{notificationsLabels.labelSeeAll}
-							</label>}
+              <NavigateLabel 
+                style="font-bold text-md text-blue hover:underline underline-offset-2" 
+                route="doctor/notifications"
+                text={notificationsLabels.labelSeeAll}/>
+            }
 				</div>
 				<div className={`w-full rounded-lg shadow-md h-full bg-white ${styles.height95}`}>
 					{notifications.map((element: Object, index: number) => {
