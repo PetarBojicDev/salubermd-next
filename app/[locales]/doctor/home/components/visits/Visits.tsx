@@ -42,7 +42,7 @@ async function getRecentVisits(server: string, token: string) {
         <>
           {data.map((element: Object, index: number) => {
             return (
-              <VisitDetail key={index} visit={element}/>
+              <VisitDetail key={index} visit={element} visitIndex={index}/>
             );
           })}
         </>
@@ -56,17 +56,17 @@ async function getRecentVisits(server: string, token: string) {
     }
 
     return (
-      <div  className={`${styles.height25}`}>
-        <div className="h-1/6 inline-flex justify-between w-full">
+      <div className="md:mb-5 mb-0">
+        <div className="h-7 inline-flex justify-between w-full">
             <label className="font-bold text-md">{visitsLabels.labelVisits}</label>
             {pastVisits.length > 0 && 
             <NavigateLabel 
-              style="font-bold text-md text-blue mr-5 hover:underline underline-offset-2" 
+              style="font-bold text-md text-blue md:pr-5 pr-0 hover:underline underline-offset-2" 
               route="doctor/visits"
               text={visitsLabels.labelSeeAll}/>
             }
         </div>
-        <div className={`inline-flex w-full h-5/6`}>
+        <div className={`w-full md:pr-5 pr-0`}>
           {pastVisits.length > 0 ? renderVisits(pastVisits) : renderNoVisits()}
         </div>
       </div>

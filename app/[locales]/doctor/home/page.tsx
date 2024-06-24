@@ -13,22 +13,19 @@ import Notifications from "./components/notifications/Notifications";
 const Home = async () => {
 
   return (
-    <div className="mx-auto w-full h-full bg-background inline-flex p-5">
-      <div className={`h-full block ${styles.width67}`}>
+    <div className="mx-auto w-full bg-background p-5">
+      <div className="inline-block md:w-3/4 w-full align-top">
         <Suspense fallback={<TemplateVisits/>}>
           <Visits/>
         </Suspense>
-        <div className={`w-full ${styles.height5}`}></div>
-          <Suspense fallback={<TemplateAppointments/>}>
-            <Appointments/>
-          </Suspense>
+        <Suspense fallback={<TemplateAppointments/>}>
+          <Appointments/>
+        </Suspense>
       </div>
-      <div className={`h-full ${styles.width1}`}></div>
-      <div className={`h-full block ${styles.width32}`}>
+      <div className="inline-block md:w-1/4 w-full align-top">
         <Suspense fallback={<TemplateActivities/>}>
           <Activities/>
-        </Suspense> 
-        <div className={`w-full ${styles.height5}`}></div>
+        </Suspense>
         <Suspense fallback={<TemplateNotifications/>}>
           <Notifications/>
         </Suspense>

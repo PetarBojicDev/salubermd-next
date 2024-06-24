@@ -23,7 +23,7 @@ async function getAppointments(server: string, token: string) {
 
   //put this here just to see suspense
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-  await delay(3000);
+  await delay(500000);
 
   return data.slot;
 }
@@ -55,8 +55,8 @@ async function getAppointments(server: string, token: string) {
     }
 
     return (
-      <div className={`block w-full pr-5 ${styles.height70}`}>
-        <div className={`${styles.height5} inline-flex justify-between w-full`}>
+      <div className="block w-full md:pr-5 pr-0">
+        <div className="h-7 inline-flex justify-between w-full">
 					<label className="font-bold text-md">{appointmentsLabels.labelAppointments}</label>
           {appointments.length > 0 && 
             <NavigateLabel 

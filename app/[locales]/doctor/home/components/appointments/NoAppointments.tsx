@@ -20,10 +20,10 @@ export default function NoAppointments() {
         priority
       />
 			<div className="block">
-				<label className="text-md">{translate("no_appointments_1") + " "}</label>
-				<label onClick={() => showTips()} className="text-md text-blue hover:underline underline-offset-1">{translate("no_visits_3") + " "}</label>
+				<label className="md:text-base text-sm">{translate("no_appointments_1") + " "}</label>
+				<label onClick={() => showTips()} className="md:text-base text-sm md:inline-block block text-center text-blue hover:underline underline-offset-1">{translate("no_visits_3") + " "}</label>
 			</div>
-			<label className="text-md">{translate("no_appointments_2")}</label>
+			<label className="md:text-base text-sm">{translate("no_appointments_2")}</label>
 		</div>
   );
 }
