@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import calendarImage from "../../../../../../public/images/calendar.png"
 
-export default async function NoAppointments() {
+export default function NoAppointments() {
 
 	const translate = useTranslations();
 

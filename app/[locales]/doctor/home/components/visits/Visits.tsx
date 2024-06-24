@@ -5,6 +5,7 @@ import VisitDetail from "./VisitDetail";
 import styles from '../../home.module.css';
 import useTranslate from "@/public/translate/translate";
 import NoVisits from "./NoVisits";
+import NavigateLabel from "@/app/[locales]/components/NavigateLabel";
 
 async function getRecentVisits(server: string, token: string) {
   const response = await fetch(`${server}/backoffice/getDoctorData/temp`, {
@@ -59,7 +60,11 @@ async function getRecentVisits(server: string, token: string) {
         <div className="h-1/6 inline-flex justify-between w-full">
             <label className="font-bold text-md">{visitsLabels.labelVisits}</label>
             {pastVisits.length > 0 && 
-            <label className="font-bold text-md text-blue mr-5 hover:underline underline-offset-2">{visitsLabels.labelSeeAll}</label>}
+            <NavigateLabel 
+              style="font-bold text-md text-blue mr-5 hover:underline underline-offset-2" 
+              route="doctor/visits"
+              text={visitsLabels.labelSeeAll}/>
+            }
         </div>
         <div className={`inline-flex w-full h-5/6`}>
           {pastVisits.length > 0 ? renderVisits(pastVisits) : renderNoVisits()}
