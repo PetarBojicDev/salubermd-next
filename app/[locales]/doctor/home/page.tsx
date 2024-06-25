@@ -1,7 +1,6 @@
 "server-only";
 import React, { Suspense } from "react";
 import Visits from "./components/visits/Visits";
-import styles from "./home.module.css";
 import TemplateVisits from "./components/visits/TemplateVisits";
 import TemplateAppointments from "./components/appointments/TemplateAppointments";
 import Appointments from "./components/appointments/Appointments";

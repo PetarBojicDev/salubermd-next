@@ -1,8 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import React, { useContext } from "react";
-import { MdCalendarMonth, MdLogout } from "react-icons/md";
-import { FaHome } from "react-icons/fa";
+import { MdCalendarMonth, MdLogout, MdPhone } from "react-icons/md";
+import { FaHome, FaUsers } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
 import { DrawerItemProp } from "@/public/constants/props";
 import { MainContext } from "../ContextProvider";
@@ -24,6 +24,10 @@ const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
         return <MdCalendarMonth className="text-white" size={30}></MdCalendarMonth>;
       case "logout":
         return <MdLogout className="text-sidebar-divider" size={30}></MdLogout>;
+      case "patients":
+        return <FaUsers className="text-white" size={30}></FaUsers>;
+      case "contact_us":
+        return <MdPhone className="text-white" size={30}></MdPhone>;
       default:
         return <></>;
     }

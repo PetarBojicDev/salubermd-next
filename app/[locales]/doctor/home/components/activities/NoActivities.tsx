@@ -10,9 +10,9 @@ export default async function NoActivities() {
 	}
 
   return (
-		<div className="w-full h-full rounded-lg shadow-md bg-white mr-5 p-5">
-			<label className="text-md block">{translate("no_available_slots")}</label>
-			<label onClick={() => navigateToAgenda()} className="text-md text-blue hover:underline underline-offset-1">{translate("add_first_availability")}</label>
+		<div className="w-full md:h-40 rounded-lg shadow-md bg-white mr-5 p-5">
+			<label className="md:text-base text-sm block text-center">{translate("no_available_slots")}</label>
+			<label onClick={() => navigateToAgenda()} className="md:text-base text-sm block text-center text-blue hover:underline underline-offset-1">{translate("add_first_availability")}</label>
 		</div>
   );
 }

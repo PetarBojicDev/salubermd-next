@@ -12,8 +12,8 @@ export default function NotificationDetail({
 				<label className="text-xs text-gray">
 					{formatTimestampToDateWithTime(notification?.date) + " " + formatTImestampToTime(notification?.date)} 
 					</label>
-				<label className="text-base font-bold">{notification?.title}</label>
-				<label className="text-base">{notification?.message}</label>
+				<label className="md:text-base text-sm font-bold">{notification?.title}</label>
+				<label className="text-sm">{notification?.message}</label>
 			</div>
 		</div>
   );

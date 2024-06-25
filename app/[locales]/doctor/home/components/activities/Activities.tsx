@@ -1,7 +1,6 @@
 import React from "react";
 import "server-only";
 import { cookies } from 'next/headers';
-import styles from '../../home.module.css';
 import { formatTimestampToDate, formatTimestampToHours } from "@/public/constants/utils";
 import useTranslate from "@/public/translate/translate";
 import NoActivities from "./NoActivities";
@@ -45,16 +44,16 @@ async function getTodayActivities(server: string, token: string) {
     const renderSlots = (avAM: Object[], avPM: Object[], apAM: Object[], apPM: Object[]) => {
 
       return (
-        <div className="h-full bg-white rounded-lg shadow-md w-full inline-flex">
+        <div className="bg-white md:h-32 rounded-lg shadow-md w-full inline-flex">
           <div className="w-1/2">
-            <div className="pl-3 pt-8 inline-grid w-full">
+            <div className="pl-3 pt-3 pb-3 inline-grid w-full">
               <label className="text-xs text-gray">{activitiesLabels.todayAM}</label>
               <label className="text-lg font-bold text-online">
                 {avAM.length != 0 ? 
                   (avAM.length + " " + activitiesLabels.labelSlots) : 
                   activitiesLabels.labelNoSlots}
               </label>
-              <label className="text-md">
+              <label className="text-sm">
                 {apAM.length != 0 ? 
                   (apAM.length + " " + activitiesLabels.labelAppointments) : 
                   activitiesLabels.labelNoAppointments} 
@@ -62,14 +61,14 @@ async function getTodayActivities(server: string, token: string) {
             </div>
           </div>
           <div className="w-1/2">
-            <div className="pl-3 pt-8 inline-grid w-full">
+            <div className="pl-3 pt-3 pb-3 inline-grid w-full">
               <label className="text-xs text-gray">{activitiesLabels.todayPM}</label>
               <label className="text-lg font-bold text-online">
                 {avPM.length != 0 ? 
                   (avPM.length + " " + activitiesLabels.labelSlots) : 
                   activitiesLabels.labelNoSlots}
               </label>
-              <label className="text-md">{apPM.length != 0 ? 
+              <label className="text-sm">{apPM.length != 0 ? 
                 (apPM.length + " " + activitiesLabels.labelAppointments) : 
                 activitiesLabels.labelNoAppointments}
               </label>
@@ -103,8 +102,8 @@ async function getTodayActivities(server: string, token: string) {
 			}
 
 			return (
-        <div className={`${styles.height25}`}>
-          <div className="h-1/6 inline-flex justify-between w-full">
+        <div className="mb-5">
+          <div className="h-7 inline-flex justify-between w-full">
               <label className="font-bold text-md">{activitiesLabels.labelActivities}</label>
               {slots.length > 0 && 
               <NavigateLabel 

@@ -2,7 +2,6 @@ import React from "react";
 import "server-only";
 import { cookies } from 'next/headers';
 import VisitDetail from "./VisitDetail";
-import styles from '../../home.module.css';
 import useTranslate from "@/public/translate/translate";
 import NoVisits from "./NoVisits";
 import NavigateLabel from "@/app/[locales]/components/NavigateLabel";

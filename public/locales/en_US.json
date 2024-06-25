@@ -80,5 +80,7 @@
   "no_visits_3": "here are some tips ",
   "no_visits_4": "on how to use them ;)",
   "no_appointments_1": "You have no scheduled appointments yet, ",
-  "no_appointments_2": "on how to create your first appointment"
+  "no_appointments_2": "on how to create your first appointment",
+  "patients": "Patients",
+  "contact_us": "Contact us"
 }

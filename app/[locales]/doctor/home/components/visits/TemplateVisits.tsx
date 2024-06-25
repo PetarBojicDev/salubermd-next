@@ -1,5 +1,4 @@
 import "server-only";
-import styles from "../../home.module.css";
 import useTranslate from "@/public/translate/translate";
 
 export default async function TemplateVisits() {

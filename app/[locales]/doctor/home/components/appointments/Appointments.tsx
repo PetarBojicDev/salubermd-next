@@ -1,7 +1,6 @@
 import React from "react";
 import "server-only";
 import { cookies } from 'next/headers';
-import styles from '../../home.module.css';
 import AppointmentDetail from "./AppointmentDetail";
 import useTranslate from "@/public/translate/translate";
 import NoAppointments from "./NoAppointments";
@@ -20,12 +19,14 @@ async function getAppointments(server: string, token: string) {
   }
 
   const data = await response.json();
+  const appointments = data.slot;
+  const slicedAppointments = appointments.slice(0, 4);
 
   //put this here just to see suspense
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-  await delay(500000);
+  await delay(3000);
 
-  return data.slot;
+  return slicedAppointments;
 }
 
   export default async function Appointments() {
@@ -41,7 +42,7 @@ async function getAppointments(server: string, token: string) {
         <>
           {data.map((element: Object, index: number) => {
             return (
-              <AppointmentDetail key={index} appointment={element}/>
+              <AppointmentDetail key={index} appointment={element} indexDetail={index}/>
             );
           })}
         </>
@@ -60,12 +61,12 @@ async function getAppointments(server: string, token: string) {
 					<label className="font-bold text-md">{appointmentsLabels.labelAppointments}</label>
           {appointments.length > 0 && 
             <NavigateLabel 
-              style="font-bold text-md text-blue mr-5 hover:underline underline-offset-2" 
+              style="font-bold text-md text-blue hover:underline underline-offset-2" 
               route="doctor/appointments"
               text={appointmentsLabels.labelSeeAll}/>
           }
 			  </div>
-        <div className={`${styles.height95}`}>
+        <div>
           {appointments.length > 0 ? renderAppointments(appointments) : renderNoAppointments()}
         </div>
     </div>
