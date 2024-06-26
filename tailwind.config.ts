@@ -33,7 +33,8 @@ const config: Config = {
       'gray-card': '#d4d4d4',
       'gray-hover': '#f2f2f2',
       'gray-card-text': '#ababab',
-      'divider': '#c1c2c4'
+      'divider': '#c1c2c4',
+      'black': '#000000'
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

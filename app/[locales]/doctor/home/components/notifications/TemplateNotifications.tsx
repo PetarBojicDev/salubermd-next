@@ -15,8 +15,8 @@ export default async function TemplateNotifications() {
 				{Array.from({ length: 4 }).map((_, index) => (
 					<div key={index} className="h-1/4 w-full border-b border-divider">
 						<div className="p-5 inline-grid w-full pt-7">
-							<div className={`bg-gray-card-text h-4 w-1/2 rounded-md mb-1 skeleton`}></div>
-							<div className={`bg-gray-card-text h-4 w-2/3 rounded-md mb-1 skeleton`}></div>
+							<div className={`bg-gray-card-text h-4 w-1/2 rounded-xl mb-1 skeleton`}></div>
+							<div className={`bg-gray-card-text h-4 w-2/3 rounded-xl mb-1 skeleton`}></div>
 						</div>
 					</div>
 				))}

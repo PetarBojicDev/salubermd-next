@@ -18,15 +18,15 @@ export default async function TemplateAppointments() {
 							${index == 0 && "mr-5 md:mb-0 mb-5"}`}>
 							<div className="md:w-1/4 w-1/2">
 								<div className="p-5 inline-grid w-full pt-7">
-									<div className="bg-gray-card-text h-4 w-2/3 rounded-md mb-1 skeleton"></div>
-									<div className="bg-gray-card-text h-4 w-3/4 rounded-md mb-1 skeleton"></div>
+									<div className="bg-gray-card-text h-4 w-2/3 rounded-xl mb-1 skeleton"></div>
+									<div className="bg-gray-card-text h-4 w-3/4 rounded-xl mb-1 skeleton"></div>
 								</div>
 							</div>
 							<div className="w-3/4">
 								<div className="h-7 inline-flex justify-between w-full">
 									<div className="p-5 inline-grid w-full pt-7">
-										<div className="bg-gray-card-text h-4 md:w-1/3 w-2/3 rounded-md mb-1 skeleton"></div>
-										<div className="bg-gray-card-text h-4 md:w-2/5 w-3/4 rounded-md mb-1 skeleton"></div>
+										<div className="bg-gray-card-text h-4 md:w-1/3 w-2/3 rounded-xl mb-1 skeleton"></div>
+										<div className="bg-gray-card-text h-4 md:w-2/5 w-3/4 rounded-xl mb-1 skeleton"></div>
 									</div>
 								</div>
 							</div>
