@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import TipsModal from "../TipsModal";
 
-export default async function NoVisits() {
+export default function NoVisits() {
 
 	const translate = useTranslations();
 
