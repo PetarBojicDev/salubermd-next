@@ -1,38 +1,51 @@
 "use client";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, {useState} from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 interface DropdownProps {
   listValues: Object[];
   selectedValue: Object;
+  validated: boolean;
   setSelectedValue: React.Dispatch<React.SetStateAction<boolean>>;
+  placeholder?: string;
+  iconSize?: number;
 }
 
-const Dropdown = ({listValues, selectedValue, setSelectedValue}: DropdownProps) => {
+const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, placeholder, iconSize}: DropdownProps) => {
 
   const translate = useTranslations();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleSelection = (element: Object) => {
+    setSelectedValue(element);
+    setIsDropdownOpen(false);
+  }
 
   return (
     <div className="dropdown dropdown-end w-full">
-      <div tabIndex={0} role="button" className="btn bg-white w-full inline-flex justify-between border-gray-light border-2">
-        <span className="md:inline hidden">{translate(selectedValue.name)}</span>
-        <FaChevronDown
-          size={16}
-        />
+      <div tabIndex={0} role="button" className={`btn bg-white w-full inline-flex justify-between ${
+            !validated ? "border-invalid focus:border-invalid" : "border-gray-light focus:border-gray-light"} border-2 hover:bg-transparent`}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      >
+        <span className={`md:inline hidden ${!selectedValue ? "text-gray-400" : ""}`}>
+          {selectedValue ? translate(selectedValue.name) : placeholder}
+        </span>
+        <FaChevronDown size={iconSize || 16} />
       </div>
-      <ul tabIndex={1} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-full rounded-lg overflow-auto max-h-60 block">
-        {listValues.map((element: Object, index: number) => {
+      {isDropdownOpen && (
+        <ul tabIndex={1} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-full rounded-lg overflow-auto max-h-60 block">
+          {listValues.map((element: Object, index: number) => {
 
-          const isCurrentValue = element.value === selectedValue.value;
-          
-          return (
-            <li className="w-full block" key={element.value}>
-              <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => setSelectedValue(element)}>{translate(element.name)}</label>
-            </li>
-          );
-        })}
-      </ul>
+            const isCurrentValue = element.value === selectedValue.value;
+            
+            return (
+              <li className="w-full block" key={element.value}>
+                <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => handleSelection(element)}>{translate(element.name)}</label>
+              </li>
+            );
+          })}
+        </ul>)}
     </div>
   );
 };

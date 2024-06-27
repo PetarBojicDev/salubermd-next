@@ -10,8 +10,8 @@ import Button from "../../components/Button";
 import Image from "next/image";
 import { RootState } from "@/store/store";
 import { callAPILsLanguage } from "../apiCalls";
-import DropDownList from "../../components/DropDownList";
 import SignaturePad from "../../components/SignaturePad";
+import DropdownWithTitle from "../../components/DropdownWithTitle";
 
 const Page = () => {
   const translate = useTranslations();
@@ -21,7 +21,6 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [languages, setLanguages] = useState([]);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -119,16 +118,17 @@ const Page = () => {
             validated={isNotBlank(birthday)}
             inputStyle="form-control w-1/2"
             titleStyle="text-left text-sm font-bold"
+            placeholderTxt="DD/MM/YYYY"
           />
-          <InputWithTitle
-            titleLeft={`${translate("gender")}*`}
-            iconRight=""
-            value={gender}
-            setValue={setGender}
-            type={"text"}
-            validated={isNotBlank(gender)}
-            inputStyle="form-control w-1/2"
+          <DropdownWithTitle
+            title={`${translate("gender")}*`}
             titleStyle="text-left text-sm font-bold"
+            inputStyle="form-control w-1/2 mb-2"
+            listValues={[]}
+            selectedValue={gender}
+            setSelectedValue={setGender}
+            validated={isNotBlank(gender)}
+            placeholder={translate("select")}
           />
         </div>
         <InputWithTitle
@@ -142,15 +142,15 @@ const Page = () => {
           titleStyle="text-left text-sm font-bold"
         />
         <div className="flex space-x-4">
-          <InputWithTitle
-            titleLeft={`${translate("country")}*`}
-            iconRight=""
-            value={country}
-            setValue={setCountry}
-            type={"text"}
-            validated={isNotBlank(country)}
-            inputStyle="form-control w-1/2"
+          <DropdownWithTitle
+            title={`${translate("country")}*`}
             titleStyle="text-left text-sm font-bold"
+            inputStyle="form-control w-1/2"
+            listValues={[]}
+            selectedValue={country}
+            setSelectedValue={setCountry}
+            validated={isNotBlank(country)}
+            placeholder={translate("select")}
           />
           <InputWithTitle
             titleLeft={`${translate("city")}*`}
@@ -174,16 +174,15 @@ const Page = () => {
           titleStyle="text-left text-sm font-bold"
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
-        <InputWithTitle
-          titleLeft={`${translate("specialty")}*`}
-          iconRight=""
-          value={specialty}
-          setValue={setSpecialty}
-          type={"text"}
-          validated={isNotBlank(specialty)}
-          inputStyle="form-control w-full"
+        <DropdownWithTitle
+          title={`${translate("specialty")}*`}
           titleStyle="text-left text-sm font-bold"
-          bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
+          inputStyle="form-control w-full mb-2"
+          listValues={[]}
+          selectedValue={specialty}
+          setSelectedValue={setSpecialty}
+          validated={isNotBlank(specialty)}
+          placeholder={translate("select")}
         />
         <InputWithTitle
           titleLeft={`${translate("medical_school")}`}
@@ -192,7 +191,7 @@ const Page = () => {
           setValue={setMedicalSchool}
           type={"text"}
           validated={isNotBlank(medicalSchool)}
-          inputStyle="form-control w-full"
+          inputStyle="form-control w-full m"
           titleStyle="text-left text-sm font-bold"
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
@@ -218,15 +217,15 @@ const Page = () => {
             titleStyle="text-left text-sm font-bold"
           />
         </div>
-        <InputWithTitle
-          titleLeft={`${translate("slot_duration")}*`}
-          iconRight=""
-          value={slotDuration}
-          setValue={setSlotDuration}
-          type={"text"}
-          validated={isNotBlank(slotDuration)}
-          inputStyle="form-control w-full"
+        <DropdownWithTitle
+          title={`${translate("slot_duration")}*`}
           titleStyle="text-left text-sm font-bold"
+          inputStyle="form-control w-full mb-2"
+          listValues={[]}
+          selectedValue={slotDuration}
+          setSelectedValue={setSlotDuration}
+          validated={isNotBlank(slotDuration)}
+          placeholder={translate("select")}
         />
         <div className="flex space-x-4">
           <InputWithTitle
@@ -239,15 +238,15 @@ const Page = () => {
             inputStyle="form-control w-1/2"
             titleStyle="text-left text-sm font-bold"
           />
-          <InputWithTitle
-            titleLeft={`${translate("currency")}*`}
-            iconRight=""
-            value={currency}
-            setValue={setCurrency}
-            type={"text"}
-            validated={isNotBlank(currency)}
-            inputStyle="form-control w-1/2"
+          <DropdownWithTitle
+            title={`${translate("currency")}*`}
             titleStyle="text-left text-sm font-bold"
+            inputStyle="form-control w-1/2 mb-2"
+            listValues={[]}
+            selectedValue={currency}
+            setSelectedValue={setCurrency}
+            validated={isNotBlank(currency)}
+            placeholder={translate("select")}
           />
         </div>
         <SignaturePad
@@ -257,18 +256,6 @@ const Page = () => {
           setSignature={setSignature}
           validated={true}
         />
-        {/* <DropDownList
-          list={languages}
-          titleLeft={`${translate("language")}*`}
-          iconRight=""
-          value={chosenLan}
-          setValue={setChosenLan}
-          type={"text"}
-          validated={validateLanguage()}
-          inputStyle="form-control w-full"
-          titleStyle="text-left text-sm font-bold"
-          placeholderTxt={translate("select")}
-        /> */}
         <Button
           text={translate("back")}
           disabled={false}

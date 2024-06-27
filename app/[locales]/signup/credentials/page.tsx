@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 import Image from "next/image";
 import { RootState } from "@/store/store";
 import { callAPILsLanguage } from "../apiCalls";
-import DropDownList from "../../components/DropDownList";
+import DropdownWithTitle from "../../components/DropdownWithTitle";
 
 const Page = () => {
   const translate = useTranslations();
@@ -51,7 +51,7 @@ const Page = () => {
   };
 
   const validateLanguage = () => {
-    return isNotBlank(chosenLan);
+    return isNotBlank(chosenLan?.name);
   };
 
   return (
@@ -97,17 +97,15 @@ const Page = () => {
           titleStyle="text-left text-sm font-bold"
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
         />
-        <DropDownList
-          list={languages}
-          titleLeft={`${translate("language")}*`}
-          iconRight=""
-          value={chosenLan}
-          setValue={setChosenLan}
-          type={"text"}
-          validated={validateLanguage()}
-          inputStyle="form-control w-full"
+        <DropdownWithTitle
+          title={`${translate("language")}*`}
           titleStyle="text-left text-sm font-bold"
-          placeholderTxt={translate("select")}
+          inputStyle="form-control w-full mx-auto mb-3"
+          listValues={languages}
+          selectedValue={chosenLan}
+          setSelectedValue={setChosenLan}
+          validated={validateLanguage()}
+          placeholder={translate("select")}
         />
         <Button
           text={translate("next")}
