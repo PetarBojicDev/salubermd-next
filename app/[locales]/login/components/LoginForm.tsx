@@ -17,17 +17,11 @@ export default function LoginForm() {
   const translate = useTranslations();
   const router = useRouter();
 
-  const [server, setServer] = useState();
+  const [server, setServer] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if(server) {
-      preLogin();
-    }
-  },[server]);
 
   const validateUsername = () => {
     return isNotBlank(username);
@@ -56,6 +50,12 @@ export default function LoginForm() {
       setErrorMessage(translate("bad_credentials_description"));
     }
   }
+
+  useEffect(() => {
+    if(server) {
+      preLogin();
+    }
+  },[server]);
 
   const authenticate = async () => {
 

@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { getRoute } from "../../../public/constants/utils";
 import { useContext } from "react";
 import { MainContext } from "./ContextProvider";
+import Image from "next/image";
 
 const LanguageSwitcher = () => {
 
@@ -25,7 +26,7 @@ const LanguageSwitcher = () => {
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn m-1 bg-white">
         <span className="md:inline hidden">{languageNew?.label}</span>
-        <img src={`/images/countries/${languageNew?.icon}`} height={30} width={30} alt="/images/countries/download.png"/>
+        <Image src={`/images/countries/${languageNew?.icon}`} height={30} width={30} alt="/images/countries/download.png"/>
       </div>
       <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-52 rounded-lg">
       {LanguageHelper.array.map((lan) => {

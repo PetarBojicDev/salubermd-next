@@ -25,10 +25,6 @@ const Page = () => {
   const [languages, setLanguages] = useState([]);
   const [chosenLan, setChosenLan] = useState("");
 
-  useEffect(() => {
-    fetchLanguages();
-  }, []);
-
   const fetchLanguages = async () => {
     const res = await callAPILsLanguage();
     if (res) {
@@ -37,6 +33,10 @@ const Page = () => {
       setErrorMessage(translate("server_error"));
     }
   };
+
+  useEffect(() => {
+    fetchLanguages();
+  }, []);
 
   const validateEmail = () => {
     return isNotBlank(email);

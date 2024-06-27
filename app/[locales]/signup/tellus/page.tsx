@@ -9,8 +9,6 @@ import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
 import Image from "next/image";
 import { RootState } from "@/store/store";
-import { callAPILsLanguage } from "../apiCalls";
-import DropDownList from "../../components/DropDownList";
 import SignaturePad from "../../components/SignaturePad";
 
 const Page = () => {
@@ -21,7 +19,6 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [languages, setLanguages] = useState([]);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -41,23 +38,6 @@ const Page = () => {
   const [signature, setSignature] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
-  useEffect(() => {
-    setSubmitDisabled(disableSubmitBtt());
-  }, [
-    firstName,
-    lastName,
-    birthday,
-    gender,
-    officeAddress,
-    country,
-    city,
-    phoneNumber,
-    specialty,
-    slotDuration,
-    feePerVisit,
-    currency,
-  ]);
-
   const disableSubmitBtt = () => {
     return (
       !isNotBlank(firstName) ||
@@ -74,6 +54,23 @@ const Page = () => {
       !isNotBlank(currency)
     );
   };
+
+  useEffect(() => {
+    setSubmitDisabled(disableSubmitBtt());
+  }, [
+    firstName,
+    lastName,
+    birthday,
+    gender,
+    officeAddress,
+    country,
+    city,
+    phoneNumber,
+    specialty,
+    slotDuration,
+    feePerVisit,
+    currency,
+  ]);
 
   return (
     <div className="bg-white flex items-center justify-center">
