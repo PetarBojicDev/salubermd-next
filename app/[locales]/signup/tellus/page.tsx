@@ -9,7 +9,6 @@ import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
 import Image from "next/image";
 import { RootState } from "@/store/store";
-import { callAPILsLanguage } from "../apiCalls";
 import SignaturePad from "../../components/SignaturePad";
 import DropdownWithTitle from "../../components/DropdownWithTitle";
 
@@ -40,23 +39,6 @@ const Page = () => {
   const [signature, setSignature] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
-  useEffect(() => {
-    setSubmitDisabled(disableSubmitBtt());
-  }, [
-    firstName,
-    lastName,
-    birthday,
-    gender,
-    officeAddress,
-    country,
-    city,
-    phoneNumber,
-    specialty,
-    slotDuration,
-    feePerVisit,
-    currency,
-  ]);
-
   const disableSubmitBtt = () => {
     return (
       !isNotBlank(firstName) ||
@@ -73,6 +55,23 @@ const Page = () => {
       !isNotBlank(currency)
     );
   };
+
+  useEffect(() => {
+    setSubmitDisabled(disableSubmitBtt());
+  }, [
+    firstName,
+    lastName,
+    birthday,
+    gender,
+    officeAddress,
+    country,
+    city,
+    phoneNumber,
+    specialty,
+    slotDuration,
+    feePerVisit,
+    currency,
+  ]);
 
   return (
     <div className="bg-white flex items-center justify-center">

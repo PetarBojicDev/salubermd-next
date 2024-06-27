@@ -10,7 +10,7 @@ export default function DoctorDrawerContent() {
     <div className="inline-grid transition-all duration-500 md:w-80 w-60">
       {drawerItems.map((item: DrawerItemProp) => {
         return (
-          <DrawerItem title={item.title} route={item.route}/>
+          <DrawerItem key={item.index} title={item.title} route={item.route}/>
         );
       })}
     </div>
