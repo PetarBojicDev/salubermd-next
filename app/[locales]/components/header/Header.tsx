@@ -5,18 +5,21 @@ import LanguageSwitcher from "../LanguageSwitcher";
 import DrawerOpener from "./DrawerOpener";
 import OnlineStatusContainer from "./OnlineStatusContainer";
 import "server-only";
+import HeaderTitle from "./HeaderTitle";
 
 export default function Header() {
 
   return (
     <div className="absolute md:h-20 h-16 w-full bg-white inline-flex items-center z-20">
       <DrawerOpener/>
-      <Image
-        src={LoginLogo}
-        alt="Login logo"
-        className="w-auto h-14 ml-5 md:inline hidden"
-        priority
-      />
+      <HeaderTitle>
+        <Image
+          src={LoginLogo}
+          alt="Login logo"
+          className="w-auto h-14 ml-5 md:inline hidden"
+          priority
+        />
+      </HeaderTitle>
       <div className="lg:w-1/6 items-end ml-auto">
         <div className="flex pr-5">
           <div className="ml-auto">

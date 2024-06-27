@@ -82,7 +82,7 @@
   "no_appointments_1": "You have no scheduled appointments yet, ",
   "no_appointments_2": "on how to create your first appointment",
   "patients": "Patients",
-  "contact_us": "Contact us",
+  "contact_us": "Contact Us",
   "about_us": "About us",
   "privacy": "Privacy",
   "about_salubermd": "About SaluberMD",
@@ -109,5 +109,8 @@
   "category": "Category",
   "description": "Description",
   "welcome_tips": "Welcome tips",
-  "welcome_tips_desc": "This is the place for the most recent visits, as soon as you finish with one videocall, you will be able to preview it in this section. On image you can see a little introduction on how it will look like."
+  "welcome_tips_desc": "This is the place for the most recent visits, as soon as you finish with one videocall, you will be able to preview it in this section. On image you can see a little introduction on how it will look like.",
+  "app": "Application",
+  "web": "Web",
+  "other": "Other"
 }

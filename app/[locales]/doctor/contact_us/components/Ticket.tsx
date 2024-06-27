@@ -3,13 +3,15 @@ import Button from "@/app/[locales]/components/Button";
 import InputWithTitle from "@/app/[locales]/components/InputWithTitle";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+import { ticketCategories } from "@/public/constants/ticket-category";
+import DropdownWithTitle from "@/app/[locales]/components/DropdownWithTitle";
 
 export default function Ticket() {
 
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [categoryValue, setCategoryValue] = useState(ticketCategories[0]);
 
   const translate = useTranslations();
 
@@ -44,15 +46,13 @@ export default function Ticket() {
           inputStyle="form-control w-full mx-auto"
           titleStyle="text-left text-sm font-bold" 
         />
-        <InputWithTitle 
-          titleLeft={translate("category")}
-          iconRight="" 
-          value={category} 
-          setValue={setCategory}
-          type={"text"}
-          validated={true}    
-          inputStyle="form-control w-full mx-auto"
-          titleStyle="text-left text-sm font-bold" 
+        <DropdownWithTitle
+          title={translate("category")}
+          titleStyle="text-left text-sm font-bold"
+          inputStyle="form-control w-full mx-auto mb-3"
+          listValues={ticketCategories}
+          selectedValue={categoryValue}
+          setSelectedValue={setCategoryValue}
         />
         <InputWithTitle 
           titleLeft={translate("description")}
