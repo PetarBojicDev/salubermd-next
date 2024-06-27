@@ -25,7 +25,7 @@ async function getRecentVisits(server: string, token: string) {
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   await delay(3000);
 
-  return slicedRecentVisits;
+  return [];
 }
 
   export default async function Visits() {
