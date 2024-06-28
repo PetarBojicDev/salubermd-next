@@ -12,6 +12,14 @@ interface MainContextProps {
   setToken: Dispatch<SetStateAction<string>>;
   server: string;
   setServer: Dispatch<SetStateAction<string>>;
+  password: string;
+  setPassword: Dispatch<SetStateAction<string>>;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  username: string;
+  setUsername: Dispatch<SetStateAction<string>>;
+  chosenLan: string;
+  setChosenLan: Dispatch<SetStateAction<string>>;
 }
 
 export const MainContext = createContext<MainContextProps>({
@@ -25,7 +33,14 @@ export const MainContext = createContext<MainContextProps>({
   setToken: () => {},
   server: "https://wseu.salubermd.com",
   setServer: () => {},
-
+  password: "",
+  setPassword: () => {},
+  email: "",
+  setEmail: () => {},
+  username: "",
+  setUsername: () => {},
+  chosenLan: "",
+  setChosenLan: () => {}
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
@@ -35,12 +50,22 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>("");
   const [server, setServer] = useState<string>("https://wseu.salubermd.com");
 
+  // signUp
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [chosenLan, setChosenLan] = useState<string>("");
+
   return (
     <MainContext.Provider value={{ openedDrawer, setOpenedDrawer, 
     doctorOnline, setDoctorOnline, 
     language, setLanguage,
     token, setToken,
-    server, setServer }}>
+    server, setServer,
+    password, setPassword,
+    email, setEmail,
+    username, setUsername,
+    chosenLan, setChosenLan }}>
       {children}
     </MainContext.Provider>
   );

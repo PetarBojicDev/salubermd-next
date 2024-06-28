@@ -112,5 +112,9 @@
   "welcome_tips_desc": "This is the place for the most recent visits, as soon as you finish with one videocall, you will be able to preview it in this section. On image you can see a little introduction on how it will look like.",
   "app": "Application",
   "web": "Web",
-  "other": "Other"
+  "other": "Other",
+  "male": "Male",
+  "female": "Female",
+  "rather_not_say" : "I’d rather not say",
+  "minuts": "mins"
 }

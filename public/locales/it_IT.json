@@ -82,5 +82,9 @@
   "no_appointments_1": "Non hai ancora appuntamenti programmati, ",
   "no_appointments_2": "su come creare il tuo primo appuntamento",
   "patients": "Pazienti",
-  "contact_us": "Contattaci"
+  "contact_us": "Contattaci",
+  "male": "Maschio",
+  "female": "Femmina",
+  "rather_not_say": "Preferisco non dirlo",
+  "minuts": "mins"
 }

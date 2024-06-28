@@ -9,13 +9,14 @@ interface DropdownWithTitleProps {
   listValues: Object[];
   validated: boolean;
   selectedValue: Object;
-  setSelectedValue: React.Dispatch<React.SetStateAction<Object>>;
+  setSelectedValue: React.Dispatch<React.SetStateAction<any>>;
   placeholder?: string;
   iconSize?: number;
+  translateValues?: boolean;
 }
 
 const DropdownWithTitle: React.FC<DropdownWithTitleProps> = ({ title, titleStyle, inputStyle, listValues, selectedValue, 
-  setSelectedValue, validated, placeholder, iconSize }) => {
+  setSelectedValue, validated, placeholder, iconSize, translateValues }) => {
   
   return (
     <label className={inputStyle}>
@@ -29,6 +30,7 @@ const DropdownWithTitle: React.FC<DropdownWithTitleProps> = ({ title, titleStyle
         validated={validated}
         placeholder={placeholder}
         iconSize={iconSize}
+        translateValues={translateValues}
       />
     </label>
   );

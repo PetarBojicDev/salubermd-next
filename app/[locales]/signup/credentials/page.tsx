@@ -3,7 +3,7 @@ import { isNotBlank } from "@/public/constants/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import LoginLogo from "../../../../public/images/login-logo.png";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
@@ -11,19 +11,17 @@ import Image from "next/image";
 import { RootState } from "@/store/store";
 import { callAPILsLanguage } from "../apiCalls";
 import DropdownWithTitle from "../../components/DropdownWithTitle";
+import { MainContext } from "../../components/ContextProvider";
 
 const Page = () => {
   const translate = useTranslations();
   const language = useSelector((state: RootState) => state.language.value);
+  const { password, setPassword, email, setEmail, username, setUsername, chosenLan, setChosenLan } = useContext(MainContext);
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [password, setPassword] = useState("");
   const [languages, setLanguages] = useState([]);
-  const [chosenLan, setChosenLan] = useState("");
 
   const fetchLanguages = async () => {
     const res = await callAPILsLanguage();

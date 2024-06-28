@@ -7,12 +7,13 @@ interface DropdownProps {
   listValues: Object[];
   selectedValue: Object;
   validated: boolean;
-  setSelectedValue: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedValue: React.Dispatch<React.SetStateAction<any>>;
   placeholder?: string;
   iconSize?: number;
+  translateValues?: boolean;
 }
 
-const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, placeholder, iconSize}: DropdownProps) => {
+const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, placeholder, iconSize, translateValues = true}: DropdownProps) => {
 
   const translate = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -29,7 +30,7 @@ const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, place
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <span className={`md:inline hidden ${!selectedValue ? "text-gray-400" : ""}`}>
-          {selectedValue ? translate(selectedValue.name) : placeholder}
+          {selectedValue ? translateValues ? translate(selectedValue.name || selectedValue?.text) : (selectedValue?.name || selectedValue?.text) : placeholder}
         </span>
         <FaChevronDown size={iconSize || 16} />
       </div>
@@ -41,7 +42,9 @@ const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, place
             
             return (
               <li className="w-full block" key={element.value}>
-                <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => handleSelection(element)}>{translate(element.name)}</label>
+                <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => handleSelection(element)}>
+                  {translateValues ? translate(element?.name || element?.text) : (element?.name || element?.text)}
+                </label>
               </li>
             );
           })}

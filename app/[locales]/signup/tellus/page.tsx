@@ -1,9 +1,9 @@
 "use client";
-import { isNotBlank } from "@/public/constants/utils";
+import { COUNTRIES, genderOptions, isNotBlank } from "@/public/constants/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import LoginLogo from "../../../../public/images/login-logo.png";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import InputWithTitle from "../../components/InputWithTitle";
 import Button from "../../components/Button";
@@ -11,11 +11,19 @@ import Image from "next/image";
 import { RootState } from "@/store/store";
 import SignaturePad from "../../components/SignaturePad";
 import DropdownWithTitle from "../../components/DropdownWithTitle";
+import { apiPostAddUser, getSpecialtyByInitiativeId } from "../apiCalls";
+import { MainContext } from "../../components/ContextProvider";
 
 const Page = () => {
   const translate = useTranslations();
   const language = useSelector((state: RootState) => state.language.value);
+  const singUpInfo = useSelector((state: RootState) => state.signUp.data.config);
+  const { password, email, username, chosenLan } = useContext(MainContext);
+  const [durationList, setDurationList] = useState([]);
   const router = useRouter();
+
+  console.log('====================================')
+  console.log(singUpInfo)
 
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
@@ -30,6 +38,7 @@ const Page = () => {
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [specialty, setSpecialty] = useState("");
+  const [specialtyList, setSpecialtyList] = useState([]);
   const [medicalSchool, setMedicalSchool] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
   const [lengthInPractise, setLengthInPractise] = useState("");
@@ -39,20 +48,50 @@ const Page = () => {
   const [signature, setSignature] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
+  useEffect(() => {
+    callGetSpecialtyByInitiativeId();
+  }, [])
+
+  const callGetSpecialtyByInitiativeId = async () => {
+    const specialtiesResp = await getSpecialtyByInitiativeId(language, singUpInfo?.initiativeId);
+    if(specialtiesResp) {
+      if(specialtiesResp?.esito === '0'){
+        const array = specialtiesResp?.specialty.map(s => {
+          return {...s, value: s?.id};
+        });
+        setSpecialtyList(array);
+      }else{
+        setErrorMessage(specialtiesResp?.motivo);
+      }
+    }else{
+      setErrorMessage(translate("server_error"));
+    }
+  }
+
+  useEffect(() => {
+    if((singUpInfo?.slots || []).length > 0) {
+      let slotsTmp = [];
+      singUpInfo?.slots.map(s => {
+        slotsTmp.push({... s, name: `${s?.value} ${translate('minuts')}`});
+      })
+      setDurationList(slotsTmp);
+    }
+  }, [singUpInfo?.slots])
+
   const disableSubmitBtt = () => {
     return (
       !isNotBlank(firstName) ||
       !isNotBlank(lastName) ||
       !isNotBlank(birthday) ||
-      !isNotBlank(gender) ||
+      !isNotBlank(gender?.name) ||
       !isNotBlank(officeAddress) ||
-      !isNotBlank(country) ||
+      !isNotBlank(country?.text) ||
       !isNotBlank(city) ||
       !isNotBlank(phoneNumber) ||
-      !isNotBlank(specialty) ||
-      !isNotBlank(slotDuration) ||
+      !isNotBlank(specialty?.name) ||
+      !isNotBlank(slotDuration?.name) ||
       !isNotBlank(feePerVisit) ||
-      !isNotBlank(currency)
+      !isNotBlank(currency?.name)
     );
   };
 
@@ -72,6 +111,46 @@ const Page = () => {
     feePerVisit,
     currency,
   ]);
+
+  const _onPressAddUserDoctor = async () => {
+    const payload = {
+      role: 4,
+      email: email,
+      username: username,
+      birthdate: "",
+      locale: chosenLan?.value,
+      country: "",
+      password: "",
+      code: "",
+      fee: "",
+      currency: "",
+      timeslot: "",
+      privacyAgreed: '[{"value":1,"values":[{"text":"Accept","value":1,"key":1,"group":1,"$$hashKey":"object:6484"}],"label":"Accept","mandatory":1,"$$hashKey":"object:6482","answer":"1"}]',
+      signaturealt: "",
+      signature: "",
+      password1: "",
+      nome: "",
+      cognome: "",
+      dob: "",
+      gender: "",
+      address: "",
+      city: "",
+      mobile: "",
+      specializations: [""],
+      school: "",
+      lengthPractise: "",
+      version: '11',
+      provider: -7,
+      licenseNumber: "",
+      otpCode: "",
+      deviceUUID: "",
+      codice_fiscale: ""
+  }
+
+    const addUserResp = await apiPostAddUser(payload);
+    console.log('********************************************************')
+    console.log(addUserResp)
+  }
 
   return (
     <div className="bg-white flex items-center justify-center">
@@ -123,10 +202,10 @@ const Page = () => {
             title={`${translate("gender")}*`}
             titleStyle="text-left text-sm font-bold"
             inputStyle="form-control w-1/2 mb-2"
-            listValues={[]}
+            listValues={genderOptions(translate)}
             selectedValue={gender}
             setSelectedValue={setGender}
-            validated={isNotBlank(gender)}
+            validated={isNotBlank(gender?.name)}
             placeholder={translate("select")}
           />
         </div>
@@ -145,11 +224,12 @@ const Page = () => {
             title={`${translate("country")}*`}
             titleStyle="text-left text-sm font-bold"
             inputStyle="form-control w-1/2"
-            listValues={[]}
+            listValues={COUNTRIES}
             selectedValue={country}
             setSelectedValue={setCountry}
-            validated={isNotBlank(country)}
+            validated={isNotBlank(country?.text)}
             placeholder={translate("select")}
+            translateValues={false}
           />
           <InputWithTitle
             titleLeft={`${translate("city")}*`}
@@ -177,11 +257,12 @@ const Page = () => {
           title={`${translate("specialty")}*`}
           titleStyle="text-left text-sm font-bold"
           inputStyle="form-control w-full mb-2"
-          listValues={[]}
+          listValues={specialtyList}
           selectedValue={specialty}
           setSelectedValue={setSpecialty}
-          validated={isNotBlank(specialty)}
+          validated={isNotBlank(specialty?.name)}
           placeholder={translate("select")}
+          translateValues={false}
         />
         <InputWithTitle
           titleLeft={`${translate("medical_school")}`}
@@ -189,7 +270,7 @@ const Page = () => {
           value={medicalSchool}
           setValue={setMedicalSchool}
           type={"text"}
-          validated={isNotBlank(medicalSchool)}
+          validated={true}
           inputStyle="form-control w-full m"
           titleStyle="text-left text-sm font-bold"
           bTxtLeftStyle="text-right text-blue text-sm font-bold hover:underline"
@@ -201,7 +282,7 @@ const Page = () => {
             value={licenseNumber}
             setValue={setLicenseNumber}
             type={"text"}
-            validated={isNotBlank(licenseNumber)}
+            validated={true}
             inputStyle="form-control w-1/2"
             titleStyle="text-left text-sm font-bold"
           />
@@ -220,10 +301,10 @@ const Page = () => {
           title={`${translate("slot_duration")}*`}
           titleStyle="text-left text-sm font-bold"
           inputStyle="form-control w-full mb-2"
-          listValues={[]}
+          listValues={durationList}
           selectedValue={slotDuration}
           setSelectedValue={setSlotDuration}
-          validated={isNotBlank(slotDuration)}
+          validated={isNotBlank(slotDuration?.name)}
           placeholder={translate("select")}
         />
         <div className="flex space-x-4">
@@ -241,10 +322,10 @@ const Page = () => {
             title={`${translate("currency")}*`}
             titleStyle="text-left text-sm font-bold"
             inputStyle="form-control w-1/2 mb-2"
-            listValues={[]}
+            listValues={singUpInfo?.currencies || []}
             selectedValue={currency}
             setSelectedValue={setCurrency}
-            validated={isNotBlank(currency)}
+            validated={isNotBlank(currency?.name)}
             placeholder={translate("select")}
           />
         </div>
@@ -276,7 +357,8 @@ const Page = () => {
           loading={loading}
           onPress={() => {
             setLoading(true);
-            router.push(`/${language}/login`);
+            _onPressAddUserDoctor();
+            // router.push(`/${language}/login`);
           }}
         />
         {errorMessage && (
