@@ -3,7 +3,6 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { StoreProvider } from "@/store/StoreProvider";
 import React from "react";
 
 interface LayoutProps {
@@ -23,11 +22,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={manrope.className}>
-        <StoreProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </StoreProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
