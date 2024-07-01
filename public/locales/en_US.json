@@ -116,5 +116,10 @@
   "male": "Male",
   "female": "Female",
   "rather_not_say" : "I’d rather not say",
-  "minuts": "mins"
+  "minuts": "mins",
+  "by_consultations": "By consultations",
+  "by_lastname": "By surname",
+  "active_patients": "Active patients",
+  "ascending": "Ascending",
+  "descending": "Descending"
 }

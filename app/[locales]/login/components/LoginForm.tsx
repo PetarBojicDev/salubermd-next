@@ -13,11 +13,11 @@ import { MainContext } from "../../components/ContextProvider";
 
 export default function LoginForm() {
 
-  const { language, setToken } = useContext(MainContext);
+  const { language, setToken, setServer } = useContext(MainContext);
   const translate = useTranslations();
   const router = useRouter();
 
-  const [server, setServer] = useState("");
+  const [serverState, setServerState] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,7 +38,7 @@ export default function LoginForm() {
       password: password
     }
 
-    const response = await apiPreLogin(server, preloginPayload);
+    const response = await apiPreLogin(serverState, preloginPayload);
     if(response){
       if(response.esito === "3") {
         authenticate();
@@ -52,10 +52,10 @@ export default function LoginForm() {
   }
 
   useEffect(() => {
-    if(server) {
+    if(serverState) {
       preLogin();
     }
-  },[server]);
+  },[serverState]);
 
   const authenticate = async () => {
 
@@ -66,7 +66,7 @@ export default function LoginForm() {
     }
 
     setTimeout(async () => {
-      const response = await apiAuthenticate(server, loginPayload);
+      const response = await apiAuthenticate(serverState, loginPayload);
 
       if(response.status != 200) {
         setErrorMessage(translate("bad_credentials_description"));
@@ -96,6 +96,7 @@ export default function LoginForm() {
       }else{
         let endpoint = response.endpoint;
         setServer(endpoint);
+        setServerState(endpoint);
         setCookie("server", endpoint);
       }
     }

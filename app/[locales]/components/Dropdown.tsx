@@ -30,7 +30,8 @@ const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, place
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <span className={`md:inline hidden ${!selectedValue ? "text-gray-400" : ""}`}>
-          {selectedValue ? translateValues ? translate(selectedValue.name || selectedValue?.text) : (selectedValue?.name || selectedValue?.text) : placeholder}
+          {selectedValue ? translateValues ? translate(selectedValue.name || selectedValue?.text || selectedValue?.title) : (selectedValue?.name || selectedValue?.text || selectedValue?.title) : placeholder}
+
         </span>
         <FaChevronDown size={iconSize || 16} />
       </div>
@@ -43,7 +44,7 @@ const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, place
             return (
               <li className="w-full block" key={element.value}>
                 <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => handleSelection(element)}>
-                  {translateValues ? translate(element?.name || element?.text) : (element?.name || element?.text)}
+                  {translateValues ? translate(element?.name || element?.text || element?.title) : (element?.name || element?.text || element?.title)}
                 </label>
               </li>
             );
