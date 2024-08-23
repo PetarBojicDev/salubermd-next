@@ -6,6 +6,7 @@ import SortPatients from './components/SortPatients';
 import { fetchPatients } from './apiCalls';
 import { MainContext } from '../../components/ContextProvider';
 import PatientLine from './components/PatientLine';
+import { getCookie, setCookie } from '../../../../public/constants/utils';
 
 export default function Patients() {
 
@@ -16,16 +17,18 @@ export default function Patients() {
   const [patientsNumber, setPatientsNumber] = useState(0);
   const [patients, setPatients] = useState([]);
   const [pageCounter, setPageCounter] = useState(0);
+  const [userToken, setUserToken] = useState(token != "" ? token : getCookie('token'));
 
   const getPatients = async () => {
 
-    const response = await fetchPatients(server, token, pageCounter, value.index, filter, sortValue);
+    const response = await fetchPatients(server, userToken, pageCounter, value.index, filter, sortValue);
     setPatientsNumber(response.patientNumber);
     setPatients(response.visits);
     setPageCounter(prev => prev++);
   }
 
   useEffect(() => {
+    setCookie('token', userToken, 7);
     getPatients();
   },[]);
 
@@ -33,7 +36,7 @@ export default function Patients() {
     <div className="mx-auto p-5">
       <FilterPatients filter={filter} setFilter={setFilter} value={value} setValue={setValue}/>
       <SortPatients sortValue={sortValue} setSortValue={setSortValue} patientsNumber={patientsNumber}/>
-      <div className="overflow-scroll md:max-h-96 max-h-80 mt-5">
+      <div className="overflow-y-scroll md:max-h-96 max-h-80 mt-5">
       {patients.map((element: Object, index: number) => {
         return (
           <PatientLine key={index} element={element}/>

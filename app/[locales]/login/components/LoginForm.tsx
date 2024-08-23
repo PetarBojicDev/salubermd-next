@@ -8,10 +8,14 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { isNotBlank, setCookie } from "../../../../public/constants/utils";
 import { useRouter } from "next/navigation";
-import { apiAuthenticate, apiGetServerByUser, apiPreLogin } from "../apiCalls";
+import { apiAuthenticate, apiGetServerByUser, apiPreLogin, apiRegisterPush } from "../apiCalls";
 import { MainContext } from "../../components/ContextProvider";
+import { v4 as uuidv4 } from 'uuid';
+import useFcmToken from '../../../../public/hooks/useFcmToken';
 
 export default function LoginForm() {
+
+  const { fcmToken } = useFcmToken();
 
   const { language, setToken, setServer } = useContext(MainContext);
   const translate = useTranslations();
@@ -75,9 +79,28 @@ export default function LoginForm() {
         const token = response.headers.get('x-auth-token');
         setToken(token || "");
         setCookie('token', token, 7);
-        router.push(`/${language}/doctor/home`);
+        registerPush(token);
       } 
     },1000);
+  }
+
+  const registerPush = async (token: string) => {
+
+    const registerPushPayload = {
+      deviceUUID: uuidv4(),
+      platform: 'web',
+      token: "test",
+      fcmToken: fcmToken,
+      userToken: token,
+    }
+
+    const response = await apiRegisterPush(serverState, registerPushPayload);
+    if(response?.esito === "0") {
+      router.push(`/${language}/doctor/home`);
+    }else{
+      setErrorMessage(translate("bad_credentials_description"));
+      setLoading(false);
+    }
   }
 
   const onPressLogin = async () => {

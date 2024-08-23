@@ -74,6 +74,18 @@ export function calculateAge(birthdateString) {
   return age;
 }
 
+export function getCookie(name) {
+  const nameEQ = name + "=";
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(nameEQ) === 0) {
+      return cookie.substring(nameEQ.length, cookie.length);
+    }
+  }
+  return null;
+}
+
 export function setCookie(name, value, days) {
   let expires = "";
   if (days) {

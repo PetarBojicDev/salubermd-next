@@ -22,9 +22,6 @@ const Page = () => {
   const [durationList, setDurationList] = useState([]);
   const router = useRouter();
 
-  console.log('====================================')
-  console.log(singUpInfo)
-
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -148,8 +145,6 @@ const Page = () => {
   }
 
     const addUserResp = await apiPostAddUser(payload);
-    console.log('********************************************************')
-    console.log(addUserResp)
   }
 
   return (

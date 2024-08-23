@@ -31,7 +31,7 @@ export const MainContext = createContext<MainContextProps>({
   setLanguage: () => {},
   token: "",
   setToken: () => {},
-  server: "https://wseu.salubermd.com",
+  server: "http://192.168.0.107:8080",
   setServer: () => {},
   password: "",
   setPassword: () => {},
@@ -48,7 +48,7 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [doctorOnline, setDoctorOnline] = useState<boolean>(false);
   const [language, setLanguage] = useState<string>("en_US");
   const [token, setToken] = useState<string>("");
-  const [server, setServer] = useState<string>("https://wseu.salubermd.com");
+  const [server, setServer] = useState<string>("http://192.168.0.107:8080");
 
   // signUp
   const [password, setPassword] = useState<string>("");

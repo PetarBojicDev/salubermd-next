@@ -36,7 +36,7 @@ const DrawerItem: React.FC<DrawerItemProp> = ({title, route}) => {
   const navigateToRoute = () => {
     if(title == "logout") {
       setToken("");
-      setServer("https://wseu.salubermd.com");
+      setServer("http://192.168.0.107:8080");
       setOpenedDrawer(false);
       router.push(`/${language}/login`);
     }else{

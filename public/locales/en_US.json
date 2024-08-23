@@ -121,5 +121,9 @@
   "by_lastname": "By surname",
   "active_patients": "Active patients",
   "ascending": "Ascending",
-  "descending": "Descending"
+  "descending": "Descending",
+  "last_visit": "Last visit",
+  "last_measurement": "Last measurement",
+  "no_visits_yet": "No visits yet",
+  "not_implemented_yet": "Not implemented yet"
 }

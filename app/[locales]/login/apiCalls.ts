@@ -14,9 +14,17 @@ interface UserPayload {
   email: string
 }
 
+interface RegisterPushPayload {
+  deviceUUID: string,
+  platform: string,
+  token: string,
+  fcmToken: string,
+  userToken: string
+}
+
 export const apiGetServerByUser = async (payload: UserPayload) => {
   try {
-    const response = await fetch(`https://wseu.salubermd.com/backoffice/shared/getServerByUser`, {
+    const response = await fetch(`http://192.168.0.107:8080/backoffice/shared/getServerByUser`, {
       method: 'POST',
       headers: {
         accept: 'application/json, text/plain, */*',
@@ -77,5 +85,27 @@ export const apiAuthenticate = async (server: string, payload: LoginPayload) => 
   } catch (error) {
       console.log(`Error in apiLogin call: ${error}`);
       return null;
+  }
+}
+
+export const apiRegisterPush = async (server: string, payload: RegisterPushPayload) => {
+  try {
+      const response = await fetch(`${server}/backoffice/registerTokenWeb`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-AUTH-TOKEN': payload.userToken
+        },
+        body: JSON.stringify(payload)
+      });
+      if(response?.status === 200){
+        const responsePayload = await response.json();
+        return responsePayload;
+      }else{
+          return null;
+      }
+  } catch (error) {
+      console.log(`Error in apiRegisterPush call: ${error}`);
+      return false;
   }
 }

@@ -4,7 +4,7 @@ interface CheckCodeProps {
 
 export const apiGetServerByCode = async (payload: CheckCodeProps) => {
     try {
-        const response = await fetch(`https://wseu.salubermd.com/backoffice/shared/getServerByCode`, {
+        const response = await fetch(`http://192.168.0.107:8080/backoffice/shared/getServerByCode`, {
             method: 'POST',
             headers: {
                 Accept: '*/*',
