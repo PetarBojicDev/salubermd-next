@@ -10,22 +10,27 @@ import { isNotBlank, setCookie } from "../../../../public/constants/utils";
 import { useRouter } from "next/navigation";
 import { apiAuthenticate, apiGetServerByUser, apiPreLogin, apiRegisterPush } from "../apiCalls";
 import { MainContext } from "../../components/ContextProvider";
-import { v4 as uuidv4 } from 'uuid';
 import useFcmToken from '../../../../public/hooks/useFcmToken';
+import { ClientJS } from 'clientjs';
 
 export default function LoginForm() {
 
+  useEffect(() => {
+    let client = new ClientJS();
+    setUuid(client.getFingerprint());
+  },[]);
+
   const { fcmToken } = useFcmToken();
 
-  const { language, setToken, setServer } = useContext(MainContext);
+  const { language, setToken, server } = useContext(MainContext);
   const translate = useTranslations();
   const router = useRouter();
 
-  const [serverState, setServerState] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uuid, setUuid] = useState("");
 
   const validateUsername = () => {
     return isNotBlank(username);
@@ -42,7 +47,7 @@ export default function LoginForm() {
       password: password
     }
 
-    const response = await apiPreLogin(serverState, preloginPayload);
+    const response = await apiPreLogin(server, preloginPayload);
     if(response){
       if(response.esito === "3") {
         authenticate();
@@ -55,12 +60,6 @@ export default function LoginForm() {
     }
   }
 
-  useEffect(() => {
-    if(serverState) {
-      preLogin();
-    }
-  },[serverState]);
-
   const authenticate = async () => {
 
     let loginPayload = {
@@ -70,7 +69,7 @@ export default function LoginForm() {
     }
 
     setTimeout(async () => {
-      const response = await apiAuthenticate(serverState, loginPayload);
+      const response = await apiAuthenticate(server, loginPayload);
 
       if(response.status != 200) {
         setErrorMessage(translate("bad_credentials_description"));
@@ -87,15 +86,15 @@ export default function LoginForm() {
   const registerPush = async (token: string) => {
 
     const registerPushPayload = {
-      deviceUUID: uuidv4(),
+      deviceUUID: uuid.toString(),
       platform: 'web',
       token: "test",
       fcmToken: fcmToken,
       userToken: token,
     }
 
-    const response = await apiRegisterPush(serverState, registerPushPayload);
-    if(response?.esito === "0") {
+    const response = await apiRegisterPush(server, registerPushPayload);
+    if(response) {
       router.push(`/${language}/doctor/home`);
     }else{
       setErrorMessage(translate("bad_credentials_description"));
@@ -118,9 +117,8 @@ export default function LoginForm() {
         setLoading(false);
       }else{
         let endpoint = response.endpoint;
-        setServer(endpoint);
-        setServerState(endpoint);
         setCookie("server", endpoint);
+        preLogin();
       }
     }
   };

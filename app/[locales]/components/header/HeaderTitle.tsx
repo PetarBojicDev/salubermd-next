@@ -13,11 +13,12 @@ export default function HeaderTitle({
   const pathname = usePathname();
   const splitted = pathname.split("/");
   const lastRoute = splitted[splitted.length - 1];
+  const subLastRoute = splitted[splitted.length - 2];
 
   const renderTitle = () => {
     return (
       <>
-        <label className="text-2xl font-bold md:inline hidden ml-7">{translate(lastRoute)}</label>
+        <label className="text-2xl font-bold md:inline hidden ml-7">{subLastRoute == "patients" ? translate("patient_details") : translate(lastRoute)}</label>
       </>
     )
   }

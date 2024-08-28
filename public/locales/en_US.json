@@ -125,5 +125,16 @@
   "last_visit": "Last visit",
   "last_measurement": "Last measurement",
   "no_visits_yet": "No visits yet",
-  "not_implemented_yet": "Not implemented yet"
+  "not_implemented_yet": "Not implemented yet",
+  "patient_details": "Patient details",
+  "medical_records": "Medical records",
+  "tracking": "Tracking",
+  "consultations": "Consultations",
+  "file_archive": "File archive",
+  "communications": "Communications",
+  "actions": "Actions",
+  "new_message": "New message",
+  "new_prescription": "New prescription",
+  "new_referral": "New referral",
+  "new_medical_certificate": "New medical certificate"
 }

@@ -3,7 +3,7 @@ import Button from "@/app/[locales]/components/Button";
 import InputWithTitle from "@/app/[locales]/components/InputWithTitle";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
-import { ticketCategories } from "@/public/constants/ticket-category";
+import { ticketCategories } from "@/public/constants/utils";
 import DropdownWithTitle from "@/app/[locales]/components/DropdownWithTitle";
 
 export default function Ticket() {

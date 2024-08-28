@@ -109,6 +109,53 @@ export const genderOptions = (translate) => [
   }
 ]
 
+export const ticketCategories = [
+  {
+    value: 0,
+    name: "app"
+  },
+  {
+    value: 1,
+    name: "web"
+  },
+  {
+    value: 2,
+    name: "other"
+  }
+];
+
+export const patientActionCategories = [
+  {
+    value: 0,
+    name: "new_message"
+  },
+  {
+    value: 1,
+    name: "new_prescription"
+  },
+  {
+    value: 2,
+    name: "new_referral"
+  },
+  {
+    value: 3,
+    name: "new_medical_certificate"
+  }
+];
+
+export const contactUsOptions = [
+  "about_us",
+  "privacy"
+]
+
+export const patientDetailsOptions = [
+  "medical_records",
+  "tracking",
+  "consultations",
+  "file_archive",
+  "communications"
+]
+
 export const COUNTRIES = [
   {text: 'Afghanistan', value: 'AF'},
   {text: '\u212bland Islands', value: 'AX'},

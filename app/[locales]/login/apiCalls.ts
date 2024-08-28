@@ -24,7 +24,7 @@ interface RegisterPushPayload {
 
 export const apiGetServerByUser = async (payload: UserPayload) => {
   try {
-    const response = await fetch(`http://192.168.0.107:8080/backoffice/shared/getServerByUser`, {
+    const response = await fetch(`https://devel.salubermd.com/backoffice/shared/getServerByUser`, {
       method: 'POST',
       headers: {
         accept: 'application/json, text/plain, */*',
@@ -70,7 +70,6 @@ export const apiPreLogin = async (server: string, payload: PreLoginPayload) => {
 }
 
 export const apiAuthenticate = async (server: string, payload: LoginPayload) => {
-  let { hostAPI } = require('../global/hostApi'); 
   try {
       const response = await fetch(`${server}/backoffice/auth`, {
         method: 'POST',
@@ -90,7 +89,7 @@ export const apiAuthenticate = async (server: string, payload: LoginPayload) => 
 
 export const apiRegisterPush = async (server: string, payload: RegisterPushPayload) => {
   try {
-      const response = await fetch(`${server}/backoffice/registerTokenWeb`, {
+      const response = await fetch(`${server}/backoffice/jws/rc/registerPushReact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,11 +97,10 @@ export const apiRegisterPush = async (server: string, payload: RegisterPushPaylo
         },
         body: JSON.stringify(payload)
       });
-      if(response?.status === 200){
-        const responsePayload = await response.json();
-        return responsePayload;
+      if(response?.status === 201){
+        return true;
       }else{
-          return null;
+          return false;
       }
   } catch (error) {
       console.log(`Error in apiRegisterPush call: ${error}`);
