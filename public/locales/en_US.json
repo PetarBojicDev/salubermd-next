@@ -136,5 +136,14 @@
   "new_message": "New message",
   "new_prescription": "New prescription",
   "new_referral": "New referral",
-  "new_medical_certificate": "New medical certificate"
+  "new_medical_certificate": "New medical certificate",
+  "age": "Age",
+  "personal_information": "Personal information",
+  "place_of_birth": "Place of birth",
+  "fiscal_code": "Fiscal code",
+  "diseases": "Diseases",
+  "allergies": "Allergies",
+  "medications": "Medications",
+  "hospitalizations": "Hospitalizations",
+  "from": "From"
 }

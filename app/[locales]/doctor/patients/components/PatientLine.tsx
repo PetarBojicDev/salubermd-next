@@ -6,10 +6,17 @@ import { MainContext } from "../../../components/ContextProvider";
 import { useRouter } from "next/navigation";
 
 interface PatientProps {
-  element: Object;
+  patientId?: number;
+  birthdate?: string;
+  name?: string;
+  surname?: string;
+  lastVisit?: number;
+}
+interface Props {
+  element: PatientProps;
 }
 
-export default function PatientLine({element}: PatientProps) {
+export default function PatientLine({element}: Props) {
 
   const { language } = useContext(MainContext);
   const translate = useTranslations();

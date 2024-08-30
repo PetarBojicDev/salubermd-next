@@ -1,9 +1,15 @@
 import { formatTImestampToTime, formatTimestampToDateWithTime } from "@/public/constants/utils";
 
+interface NotificationProps {
+	date?: number;
+	title?: string;
+	message?: string;
+}
+
 export default function NotificationDetail({
   notification,
 }: {
-  notification: Object;
+  notification: NotificationProps;
 }) {
 
   return (

@@ -1,8 +1,14 @@
 import { formatTImestampToTime, formatTimestampToDateWithTime } from "@/public/constants/utils";
 import { useTranslations } from "next-intl";
 
+interface VisitProps {
+	patientName?: string;
+	patientSurname?: string;
+	summarySaved?: boolean;
+	date?: number;
+}
 interface VisitDetailProps {
-	visit: Object;
+	visit: VisitProps;
 	visitIndex: number;
 }
 
@@ -12,7 +18,7 @@ export default function VisitDetail({
 }: VisitDetailProps) {
 
 	const translate = useTranslations();
-	const patientLabel = visit.patientName + " " + visit.patientSurname.trim().charAt(0) + ".";
+	const patientLabel = visit.patientName + " " + visit.patientSurname?.trim().charAt(0) + ".";
 
   return (
 		<div className="md:w-1/4 w-1/2 md:h-32 inline-block md:pb-0 pb-5">

@@ -17,7 +17,7 @@ import { saveSignUpInfo } from "@/store/states/signup";
 
 export default function SignupForm() {
 
-  let API = require('../../global/hostApi');
+  let API = require('../../../../public/constants/hostApi');
   const translate = useTranslations();
   const language = useSelector((state: RootState) => state.language.value);
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function SignupForm() {
   }
   const handleIconClick = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    const modalHolder = document.getElementById('my_modal_2');
+    const modalHolder = document.getElementById('my_modal_2') as HTMLDialogElement;
     if(modalHolder){
         modalHolder.showModal();
     }

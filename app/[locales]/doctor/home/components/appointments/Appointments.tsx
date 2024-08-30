@@ -15,7 +15,8 @@ async function getAppointments(server: string, token: string) {
     }
   });
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    console.log("error on getting appointments");
+    return [];
   }
 
   const data = await response.json();

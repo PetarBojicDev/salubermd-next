@@ -3,9 +3,16 @@ import { useTranslations } from "next-intl";
 import React, {useState} from "react";
 import { FaChevronDown } from "react-icons/fa";
 
+interface DropdownElement {
+  value?: Object;
+  name?: string;
+  text?: string;
+  title?: string;
+}
+
 interface DropdownProps {
   listValues: Object[];
-  selectedValue: Object;
+  selectedValue: DropdownElement;
   validated: boolean;
   setSelectedValue: React.Dispatch<React.SetStateAction<any>>;
   placeholder?: string;
@@ -37,12 +44,12 @@ const Dropdown = ({listValues, selectedValue, setSelectedValue, validated, place
       </div>
       {isDropdownOpen && (
         <ul tabIndex={1} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-full rounded-lg overflow-auto max-h-60 block">
-          {listValues.map((element: Object, index: number) => {
+          {listValues.map((element: DropdownElement, index: number) => {
 
             const isCurrentValue = element.value === selectedValue.value;
             
             return (
-              <li className="w-full block" key={element.value}>
+              <li className="w-full block">
                 <label className={`${isCurrentValue ? "font-extrabold" : ""} w-fill block`} onClick={() => handleSelection(element)}>
                   {translateValues ? translate(element?.name || element?.text || element?.title) : (element?.name || element?.text || element?.title)}
                 </label>

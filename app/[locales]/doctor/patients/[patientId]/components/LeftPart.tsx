@@ -3,8 +3,16 @@ import React from "react";
 import OfflineAvatar from "../../../../../../public/images/offline.png";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { calculateAge } from "../../../../../../public/constants/utils";
 
-const LeftPart: React.FC = () => {
+interface LeftPartProps {
+  name?: string;
+  surname?: string;
+  gender?: number;
+  dob?: string;
+}
+
+const LeftPart: React.FC<LeftPartProps> = ({name, surname, gender, dob}) => {
 
   const translate = useTranslations();
 
@@ -20,8 +28,8 @@ const LeftPart: React.FC = () => {
         </div>
       </div>
       <div className="inline-grid ml-6">
-        <span className="text-gray font-medium md:text-sm text-xs">{"Male"} | {"Age 54"}</span>
-        <span className="text-white font-semibold md:text-xl text-sm">Andrea Webber</span>
+        <span className="text-gray font-medium md:text-sm text-xs">{gender == 1 ? translate("male") : translate("female")} | {translate("age")} {calculateAge(dob)}</span>
+        <span className="text-white font-semibold md:text-xl text-sm">{name} {surname}</span>
       </div>
     </div>
   );

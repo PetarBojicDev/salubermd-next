@@ -53,6 +53,7 @@ export default function Ticket() {
           listValues={ticketCategories}
           selectedValue={categoryValue}
           setSelectedValue={setCategoryValue}
+          validated={true}
         />
         <InputWithTitle 
           titleLeft={translate("description")}

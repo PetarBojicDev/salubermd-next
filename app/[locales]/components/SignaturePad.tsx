@@ -16,16 +16,16 @@ const SignaturePad: React.FC<SignaturePadProps> = ({
   validated,
   setSignature,
 }) => {
-  const sigCanvas = useRef({});
+  const sigCanvas = useRef<SignatureCanvas | null>(null);
 
   const clear = () => {
-    sigCanvas.current.clear();
+    sigCanvas.current?.clear();
     setSignature("");
   };
 
   const save = () => {
-    const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-    setSignature(dataURL);
+    const dataURL = sigCanvas.current?.getTrimmedCanvas().toDataURL("image/png");
+    setSignature(dataURL || "");
   };
 
   const canvasBorderStyle = !validated

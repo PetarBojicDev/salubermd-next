@@ -14,12 +14,80 @@ import DropdownWithTitle from "../../components/DropdownWithTitle";
 import { apiPostAddUser, getSpecialtyByInitiativeId } from "../apiCalls";
 import { MainContext } from "../../components/ContextProvider";
 
+interface Specialty {
+  id: number;
+  name: string;
+}
+
+interface GetSpecialtyResponse {
+  esito: string;
+  specialty: Specialty[];
+  motivo?: string;
+}
+
+interface SignUpInfoProps {
+  currencies: BeanProps[];
+  initiativeId: number;
+  slots: SlotProps[];
+}
+
+interface SlotProps {
+  id: number;
+  value: string;
+  name: string;
+}
+
+interface BeanProps {
+  name?: string;
+  value?: number;
+}
+
+interface CountryProps {
+  text?: string;
+  value?: number;
+}
+
+interface AddUserProps {
+  role: number,
+  email: string,
+  birthdate: string,
+  username: string,
+  locale: string,
+  country: string,
+  password: string,
+  code: string,
+  fee: number,
+  currency: string,
+  timeslot: number,
+  privacyAgreed: string,
+  signaturealt: string,
+  signature: string,
+  password1: string,
+  nome: string,
+  cognome: string,
+  dob: string,
+  gender: number,
+  address: string,
+  city: string,
+  mobile: string,
+  specializations: number[],
+  school: string,
+  lengthPractise: string,
+  version: string,
+  provider: number,
+  licenseNumber: string,
+  otpCode: string,
+  deviceUUID?:string,
+  codice_fiscale: string
+}
+
+
 const Page = () => {
   const translate = useTranslations();
   const language = useSelector((state: RootState) => state.language.value);
-  const singUpInfo = useSelector((state: RootState) => state.signUp.data.config);
-  const { password, email, username, chosenLan } = useContext(MainContext);
-  const [durationList, setDurationList] = useState([]);
+  const signUpInfo = useSelector((state: RootState) => state.signUp.data.config) as SignUpInfoProps;
+  const { email, username, chosenLan } = useContext(MainContext);
+  const [durationList, setDurationList] = useState<SlotProps[]>([]);
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -29,19 +97,19 @@ const Page = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<BeanProps>({});
   const [officeAddress, setOfficeAddress] = useState("");
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState<CountryProps>({});
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [specialty, setSpecialty] = useState("");
-  const [specialtyList, setSpecialtyList] = useState([]);
+  const [specialty, setSpecialty] = useState<BeanProps>({});
+  const [specialtyList, setSpecialtyList] = useState<Specialty[]>([]);
   const [medicalSchool, setMedicalSchool] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
   const [lengthInPractise, setLengthInPractise] = useState("");
-  const [slotDuration, setSlotDuration] = useState("");
+  const [slotDuration, setSlotDuration] = useState<BeanProps>({});
   const [feePerVisit, setFeePerVisit] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState<BeanProps>({});
   const [signature, setSignature] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
@@ -50,7 +118,7 @@ const Page = () => {
   }, [])
 
   const callGetSpecialtyByInitiativeId = async () => {
-    const specialtiesResp = await getSpecialtyByInitiativeId(language, singUpInfo?.initiativeId);
+    const specialtiesResp: GetSpecialtyResponse = await getSpecialtyByInitiativeId(language, signUpInfo.initiativeId);
     if(specialtiesResp) {
       if(specialtiesResp?.esito === '0'){
         const array = specialtiesResp?.specialty.map(s => {
@@ -58,7 +126,7 @@ const Page = () => {
         });
         setSpecialtyList(array);
       }else{
-        setErrorMessage(specialtiesResp?.motivo);
+        setErrorMessage(specialtiesResp?.motivo || "");
       }
     }else{
       setErrorMessage(translate("server_error"));
@@ -66,14 +134,16 @@ const Page = () => {
   }
 
   useEffect(() => {
-    if((singUpInfo?.slots || []).length > 0) {
-      let slotsTmp = [];
-      singUpInfo?.slots.map(s => {
-        slotsTmp.push({... s, name: `${s?.value} ${translate('minuts')}`});
-      })
+    if (signUpInfo.slots && signUpInfo.slots.length > 0) {
+      let slotsTmp: SlotProps[] = [];
+      signUpInfo.slots.forEach(s => {
+        if (s && s.value) {
+          slotsTmp.push({ ...s, name: `${s.value} ${translate('minuts')}`});
+        }
+      });
       setDurationList(slotsTmp);
     }
-  }, [singUpInfo?.slots])
+  }, [signUpInfo?.slots])
 
   const disableSubmitBtt = () => {
     return (
@@ -110,18 +180,18 @@ const Page = () => {
   ]);
 
   const _onPressAddUserDoctor = async () => {
-    const payload = {
+    const payload: AddUserProps = {
       role: 4,
       email: email,
       username: username,
       birthdate: "",
-      locale: chosenLan?.value,
+      locale: chosenLan.value,
       country: "",
       password: "",
       code: "",
-      fee: "",
+      fee: 0,
       currency: "",
-      timeslot: "",
+      timeslot: 15,
       privacyAgreed: '[{"value":1,"values":[{"text":"Accept","value":1,"key":1,"group":1,"$$hashKey":"object:6484"}],"label":"Accept","mandatory":1,"$$hashKey":"object:6482","answer":"1"}]',
       signaturealt: "",
       signature: "",
@@ -129,11 +199,11 @@ const Page = () => {
       nome: "",
       cognome: "",
       dob: "",
-      gender: "",
+      gender: gender.value || 0,
       address: "",
       city: "",
       mobile: "",
-      specializations: [""],
+      specializations: [],
       school: "",
       lengthPractise: "",
       version: '11',
@@ -317,7 +387,7 @@ const Page = () => {
             title={`${translate("currency")}*`}
             titleStyle="text-left text-sm font-bold"
             inputStyle="form-control w-1/2 mb-2"
-            listValues={singUpInfo?.currencies || []}
+            listValues={signUpInfo?.currencies || []}
             selectedValue={currency}
             setSelectedValue={setCurrency}
             validated={isNotBlank(currency?.name)}

@@ -30,7 +30,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [uuid, setUuid] = useState("");
+  const [uuid, setUuid] = useState(-1);
 
   const validateUsername = () => {
     return isNotBlank(username);
@@ -71,14 +71,14 @@ export default function LoginForm() {
     setTimeout(async () => {
       const response = await apiAuthenticate(server, loginPayload);
 
-      if(response.status != 200) {
+      if(response?.status != 200) {
         setErrorMessage(translate("bad_credentials_description"));
         setLoading(false);
       }else{
         const token = response.headers.get('x-auth-token');
         setToken(token || "");
         setCookie('token', token, 7);
-        registerPush(token);
+        registerPush(token || "");
       } 
     },1000);
   }

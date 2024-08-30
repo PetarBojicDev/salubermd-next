@@ -6,15 +6,22 @@ import useTranslate from "@/public/translate/translate";
 import NoActivities from "./NoActivities";
 import NavigateLabel from "@/app/[locales]/components/NavigateLabel";
 
+interface SlotProps {
+  startsAt?: number;
+  patientId?: number;
+}
+
 async function getTodayActivities(server: string, token: string) {
-  const response = await fetch(`${server}/backoffice/appointment?action=search`, {
+  const response = await fetch(`${server}/backoffice/appointment`, {
     method: 'GET',
     headers: {
       'X-AUTH-TOKEN': `${token}`
     }
   });
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    console.log("error on getting today activities");
+    console.log(response);
+    return [];
   }
 
   const data = await response.json();
@@ -86,17 +93,17 @@ async function getTodayActivities(server: string, token: string) {
 			let listAppointmentTodayAM:Object[] = [];
 			let listAppointmentTodayPM:Object[] = [];
 			if ((data || []).length > 0) {
-				let listToday = data?.filter((val) => formatTimestampToDate(val?.startsAt) === today);
+				let listToday = data?.filter((val: SlotProps) => formatTimestampToDate(val?.startsAt) === today);
 				if ((listToday || []).length > 0) {
 					//AM
-					listAvailabilityTodayAM = listToday?.filter((val) => formatTimestampToHours(val?.startsAt) <= 12) || [];
+					listAvailabilityTodayAM = listToday?.filter((val: SlotProps) => formatTimestampToHours(val?.startsAt) <= 12) || [];
 					if ((listAvailabilityTodayAM || []).length > 0) {
-						listAppointmentTodayAM = listAvailabilityTodayAM.filter((val) => val?.patientId !== 0)
+						listAppointmentTodayAM = listAvailabilityTodayAM.filter((val: SlotProps) => val?.patientId !== 0)
 					}
 					//PM
-					listAvailabilityTodayPM = listToday?.filter((val) => formatTimestampToHours(val?.startsAt) > 12) || [];
+					listAvailabilityTodayPM = listToday?.filter((val: SlotProps) => formatTimestampToHours(val?.startsAt) > 12) || [];
 					if ((listAvailabilityTodayPM || []).length > 0) {
-						listAppointmentTodayPM = listAvailabilityTodayPM.filter((val) => val?.patientId !== 0)
+						listAppointmentTodayPM = listAvailabilityTodayPM.filter((val: SlotProps) => val?.patientId !== 0)
 					}
 				}
 			}

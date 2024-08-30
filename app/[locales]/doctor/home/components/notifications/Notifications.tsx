@@ -6,7 +6,6 @@ import NotificationDetail from "./NotificationDetail";
 import NavigateLabel from "@/app/[locales]/components/NavigateLabel";
 
 async function getNotifications(server: string, token: string) {
-  let offSet = new Date().getTimezoneOffset();
   const response = await fetch(`${server}/backoffice/webdoctor/notificationHistoryApp/0`, {
     method: 'GET',
     headers: {
@@ -14,7 +13,8 @@ async function getNotifications(server: string, token: string) {
     }
   });
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    console.log("error on getting notifications");
+    return [];
   }
 
   const data = await response.json();

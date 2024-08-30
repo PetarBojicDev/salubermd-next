@@ -1,14 +1,18 @@
 "use client";
 import Dropdown from '@/app/[locales]/components/Dropdown';
 import SearchInput from '@/app/[locales]/components/SearchInput';
-import React, { useState } from 'react';
+import React from 'react';
 import { consultationCategories } from '@/public/constants/consultation-categories';
 
+interface ConsultationProps {
+  title?: string;
+  index?: number;
+}
 interface FilterProps {
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
-  value: Object;
-  setValue: React.Dispatch<React.SetStateAction<Object>>;
+  value: ConsultationProps;
+  setValue: React.Dispatch<React.SetStateAction<ConsultationProps>>;
 }
 
 export default function FilterPatients({filter, setFilter, value, setValue}: FilterProps) {

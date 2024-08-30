@@ -7,7 +7,7 @@ export default function NoVisits() {
 	const translate = useTranslations();
 
 	const showTips = () => {
-		const modalHolder = document.getElementById('my_modal_3');
+		const modalHolder = document.getElementById('my_modal_3') as HTMLDialogElement;
     if(modalHolder){
         modalHolder.showModal();
     }

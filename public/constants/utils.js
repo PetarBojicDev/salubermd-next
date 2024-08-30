@@ -26,6 +26,17 @@ export function formatTimestampToDate(timestamp) {
   return `${dayString}/${monthString}/${year}`;
 }
 
+export function formatStringToDate(value) {
+  const date = new Date(value);
+  
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+  return formattedDate;
+}
+
 export function formatTimestampToDateWithTime(timestamp) {
   const date = new Date(Number(timestamp));
   

@@ -14,7 +14,8 @@ async function getRecentVisits(server: string, token: string) {
     }
   });
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    console.log("error on getting recent visits");
+    return [];
   }
 
   const data = await response.json();
@@ -25,7 +26,7 @@ async function getRecentVisits(server: string, token: string) {
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   await delay(3000);
 
-  return [];
+  return slicedRecentVisits;
 }
 
   export default async function Visits() {

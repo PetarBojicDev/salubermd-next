@@ -8,11 +8,16 @@ import { MainContext } from '../../components/ContextProvider';
 import PatientLine from './components/PatientLine';
 import { getCookie, setCookie } from '../../../../public/constants/utils';
 
+interface ConsultationProps {
+  title?: string;
+  index?: number;
+}
+
 export default function Patients() {
 
   const { token, server } = useContext(MainContext);
   const [filter, setFilter] = useState("");
-  const [value, setValue] = useState(consultationCategories[0]);
+  const [value, setValue] = useState<ConsultationProps>(consultationCategories[0]);
   const [sortValue, setSortValue] = useState(true);
   const [patientsNumber, setPatientsNumber] = useState(0);
   const [patients, setPatients] = useState([]);
@@ -21,7 +26,7 @@ export default function Patients() {
 
   const getPatients = async () => {
 
-    const response = await fetchPatients(server, userToken, pageCounter, value.index, filter, sortValue);
+    const response = await fetchPatients(server, userToken || "", pageCounter, value.index || -1, filter, sortValue);
     setPatientsNumber(response.patientNumber);
     setPatients(response.visits);
     setPageCounter(prev => prev++);

@@ -2,8 +2,18 @@ import "server-only";
 import { calculateAge, formatTimestampToDate, formatTimestampToHoursAndMinutes } from "@/public/constants/utils";
 import { useTranslations } from "next-intl";
 
+interface UserProps {
+	nome?: string;
+	cognome?: string;
+	birthdate?: string;
+}
+interface AppointmentProps {
+	startsAt?: number;
+	endsAt?: number;
+	user?: UserProps;
+}
 interface AppointmentDetailProps {
-	appointment: Object;
+	appointment: AppointmentProps;
 	indexDetail: number;
 }
 

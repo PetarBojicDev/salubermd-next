@@ -1,6 +1,11 @@
 "use client";
 import { createContext, useState, ReactNode, Dispatch, SetStateAction, useContext } from "react";
 
+interface LanguageProps {
+  name: string;
+  value: string;
+}
+
 interface MainContextProps {
   openedDrawer: boolean;
   setOpenedDrawer: Dispatch<SetStateAction<boolean>>;
@@ -18,8 +23,8 @@ interface MainContextProps {
   setEmail: Dispatch<SetStateAction<string>>;
   username: string;
   setUsername: Dispatch<SetStateAction<string>>;
-  chosenLan: string;
-  setChosenLan: Dispatch<SetStateAction<string>>;
+  chosenLan: LanguageProps;
+  setChosenLan: Dispatch<SetStateAction<LanguageProps>>;
 }
 
 export const MainContext = createContext<MainContextProps>({
@@ -39,7 +44,10 @@ export const MainContext = createContext<MainContextProps>({
   setEmail: () => {},
   username: "",
   setUsername: () => {},
-  chosenLan: "",
+  chosenLan: {
+    name: "",
+    value: ""
+  },
   setChosenLan: () => {}
 });
 
@@ -54,7 +62,10 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
-  const [chosenLan, setChosenLan] = useState<string>("");
+  const [chosenLan, setChosenLan] = useState<LanguageProps>({
+    name: "",
+    value: ""
+  });
 
   return (
     <MainContext.Provider value={{ openedDrawer, setOpenedDrawer, 

@@ -26,7 +26,7 @@ export const apiGetServerByCode = async (payload: CheckCodeProps) => {
 }
 
 export const callAPILsLanguage = async () => {
-    let {hostAPI} = require('../global/hostApi'); 
+    let {hostAPI} = require('../../../public/constants/hostApi'); 
     try {
         const response = await fetch(`${hostAPI}/backoffice/util/getAllLingue`, {
             method: 'GET',
@@ -55,7 +55,7 @@ interface CheckEmailProps {
 }
 
 export const apiPostCheckEmail = async (payload: CheckEmailProps) => {
-    let {hostAPI} = require('../global/hostApi'); 
+    let {hostAPI} = require('../../../public/constants/hostApi'); 
     try {
         const response = await fetch(`${hostAPI}/backoffice/webdoctor/checkEmailCode`, {
             method: 'POST',
@@ -80,7 +80,7 @@ export const apiPostCheckEmail = async (payload: CheckEmailProps) => {
 
 
 export const getSpecialtyByInitiativeId = async (language: string, initiativeId: number) => {
-    let {hostAPI} = require('../global/hostApi'); 
+    let {hostAPI} = require('../../../public/constants/hostApi'); 
     try {
         const response = await fetch(`${hostAPI}/backoffice/webdoctor/getSpecialtyByInitiativeId/${language}/${initiativeId}`, {
             method: 'GET',
@@ -125,7 +125,7 @@ interface AddUserProps {
     address: string,
     city: string,
     mobile: string,
-    specializations: [object],
+    specializations: number[],
     school: string,
     lengthPractise: string,
     version: string,
@@ -133,11 +133,11 @@ interface AddUserProps {
     licenseNumber: string,
     otpCode: string,
     deviceUUID?:string,
-    codice_fiscale: number
+    codice_fiscale: string
 }
 
 export const apiPostAddUser = async (payload: AddUserProps) => {
-    let {hostAPI} = require('../global/hostApi'); 
+    let {hostAPI} = require('../../../public/constants/hostApi'); 
     try {
         const response = await fetch(`${hostAPI}/backoffice/demo/addUser`, {
             method: 'POST',
